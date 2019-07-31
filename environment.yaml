@@ -1,0 +1,21 @@
+name: default-environment
+channels:
+  - conda-forge
+dependencies:
+  - python
+  - numpy
+  - pip
+  - nb_conda
+  - nb_conda_kernels
+  - sympy
+  - pip:
+    - nbgitpuller
+    - sphinx-gallery
+    - pandas
+    - matplotlib
+    - bokeh
+    - ipywidgets
+    - scipy
+    - astropy
+    - bqplot
+
