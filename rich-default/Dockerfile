@@ -36,6 +36,15 @@ RUN conda install --quiet --yes \
     fix-permissions $CONDA_DIR && \
     fix-permissions /home/$NB_USER
 
+USER root
+
+# Install sage
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    sagemath \
+    sagemath-jupyter
+
+USER $NB_UID
+
 # Modified snippet for octave
 #USER root
 #WORKDIR /tmp
