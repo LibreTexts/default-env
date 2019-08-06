@@ -1,20 +1,107 @@
-ARG BASE_CONTAINER=jupyter/datascience-notebook
+# This Dockerfile adds to the Jupyter SciPy Notebook Dockerfile, found
+# in this link: https://github.com/jupyter/docker-stacks/blob/master/scipy-notebook/Dockerfile
+# Installs packages in the root environment.
+# Includes the Python, R, Julia, Octave, and SageMath kernels.
+# To build, run: docker build -t libretexts/default-test:<tagname> .
+# Don't miss the "." at the end of the previous command.
+
+# Copyright (c) Jupyter Development Team.
+# Distributed under the terms of the Modified BSD License.
+ARG BASE_CONTAINER=jupyter/minimal-notebook:58169ec3cfd3
 FROM $BASE_CONTAINER
+
+ARG TEST_ONLY_BUILD
 
 LABEL maintainer="Libretexts Jupyter Team <libretextsteam@gmail.com>"
 
+USER root
+
+# ffmpeg for matplotlib anim
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends ffmpeg && \
+    rm -rf /var/lib/apt/lists/*
+
+# R prerequisites
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    fonts-dejavu \
+    gfortran \
+    gcc && \
+    rm -rf /var/lib/apt/lists/*
+
 USER $NB_UID
 
-# Installs additional packages to the root environment
+# Install Python 3 packages
+# Notes: 
+# octave_kernel isn't compatible with Python> 3.7 as pinned in the base-notebook,
+# so manually downgrading to Python 3.6.*
 RUN conda install --quiet --yes \
-#    'matplotlib=3.1.*' \
-    'numba=0.42*' \
-    'numpy=1.16.*' \
-    'astropy=3.2.*' \
-    'bqplot=0.11.*' \
-    'nb_conda_kernels=2.2.*' \
-    'requests=2.22.*' && \
+    'conda-forge::blas=*=openblas' \
+    'python=3.6.*' \ 
+    'ipywidgets' \
+    'pandas' \
+    'numexpr' \
+    'matplotlib' \
+    'scipy' \
+    'seaborn' \
+    'scikit-learn' \
+    'scikit-image' \
+    'sympy' \
+    'cython' \
+    'numba' \
+    'bokeh' \
+    'numpy' \
+    'astropy' \
+    'bqplot' \
+    'nb_conda_kernels' \
+    'statsmodels' \
+    'patsy' \
+    'requests' \
+    'cloudpickle' \
+    'dill' \
+    'dask' \
+    'sqlalchemy*' \
+    'hdf5' \
+    'h5py' \
+    'vincent' \
+    'beautifulsoup4' \
+    'protobuf' \
+    'xlrd' \
+    'numba' \
+    'octave' \
+    'gnuplot' \
+    'ghostscript' \
+    'octave_kernel' \
+    'rpy2' \
+    'r-base' \
+    'r-irkernel' \
+    'r-plyr' \
+    'r-devtools' \
+    'r-tidyverse' \
+    'r-shiny' \
+    'r-rmarkdown' \
+    'r-forecast' \
+    'r-rsqlite' \
+    'r-reshape2' \
+    'r-nycflights13' \
+    'r-caret' \
+    'r-rcurl' \
+    'r-crayon' \
+    'r-randomforest' \
+    'r-htmltools' \
+    'r-sparklyr' \
+    'r-htmlwidgets' \
+    'r-hexbin' && \
+    # Update the pinned version of Python
+    conda list python | grep '^python ' | tr -s ' ' | cut -d '.' -f 1,2 | sed 's/$/.*/' >> $CONDA_DIR/conda-meta/pinned && \
     conda clean --all -f -y && \
+    # Activate ipywidgets extension in the environment that runs the notebook server
+    jupyter nbextension enable --py widgetsnbextension --sys-prefix && \
+    # Also activate ipywidgets extension for JupyterLab
+    # Check this URL for most recent compatibilities
+    # https://github.com/jupyter-widgets/ipywidgets/tree/master/packages/jupyterlab-manager
+    jupyter labextension install @jupyter-widgets/jupyterlab-manager@^1.0.1 --no-build && \
+    jupyter labextension install jupyterlab_bokeh@1.0.0 --no-build && \
     jupyter lab build --dev-build=False && \
     npm cache clean --force && \
     rm -rf $CONDA_DIR/share/jupyter/lab/staging && \
@@ -23,61 +110,71 @@ RUN conda install --quiet --yes \
     fix-permissions $CONDA_DIR && \
     fix-permissions /home/$NB_USER
 
-# Downgrades conda to install octave
-RUN conda config --set allow_conda_downgrades true
-RUN conda install conda=4.6.14
-
-# Install the Octave and Sage kernels
-RUN conda install --quiet --yes \
-    'octave=4.2.1' \
-    'octave_kernel=0.28.*' && \
-#    'sage=8.8' && \
-    conda clean --all -f -y && \
+# Install facets which does not have a pip or conda package at the moment
+RUN cd /tmp && \
+    git clone https://github.com/PAIR-code/facets.git && \
+    cd facets && \
+    jupyter nbextension install facets-dist/ --sys-prefix && \
+    cd && \
+    rm -rf /tmp/facets && \
     fix-permissions $CONDA_DIR && \
     fix-permissions /home/$NB_USER
 
-USER root
+# Import matplotlib the first time to build the font cache.
+ENV XDG_CACHE_HOME /home/$NB_USER/.cache/
+RUN MPLBACKEND=Agg python -c "import matplotlib.pyplot" && \
+    fix-permissions /home/$NB_USER
 
-# Install sage
+USER root
+# Install SageMath
 RUN apt-get update && apt-get install -y --no-install-recommends \
     sagemath \
-    sagemath-jupyter
+    sagemath-jupyter && \
+    rm -rf /var/lib/apt/lists/*
+
+
+# Julia dependencies
+# # install Julia packages in /opt/julia instead of $HOME
+ENV JULIA_DEPOT_PATH=/opt/julia
+ENV JULIA_PKGDIR=/opt/julia
+ENV JULIA_VERSION=1.1.0
+
+
+RUN mkdir /opt/julia-${JULIA_VERSION} && \
+    cd /tmp && \
+    wget -q https://julialang-s3.julialang.org/bin/linux/x64/`echo ${JULIA_VERSION} | cut -d. -f 1,2`/julia-${JULIA_VERSION}-linux-x86_64.tar.gz && \
+    echo "80cfd013e526b5145ec3254920afd89bb459f1db7a2a3f21849125af20c05471 *julia-${JULIA_VERSION}-linux-x86_64.tar.gz" | sha256sum -c - && \
+    tar xzf julia-${JULIA_VERSION}-linux-x86_64.tar.gz -C /opt/julia-${JULIA_VERSION} --strip-components=1 && \
+    rm /tmp/julia-${JULIA_VERSION}-linux-x86_64.tar.gz
+RUN ln -fs /opt/julia-*/bin/julia /usr/local/bin/julia
+
+# Show Julia where conda libraries are \
+RUN mkdir /etc/julia && \
+    echo "push!(Libdl.DL_LOAD_PATH, \"$CONDA_DIR/lib\")" >> /etc/julia/juliarc.jl && \
+    # Create JULIA_PKGDIR \
+    mkdir $JULIA_PKGDIR && \
+    chown $NB_USER $JULIA_PKGDIR && \
+    fix-permissions $JULIA_PKGDIR
 
 USER $NB_UID
 
-# Modified snippet for octave
-#USER root
-#WORKDIR /tmp
+# Add Julia packages. Only add HDF5 if this is not a test-only build since
+# it takes roughly half the entire build time of all of the images on Travis
+# to add this one package and often causes Travis to timeout.
 #
-# Install octave and octave_kernel
-#RUN apt-get install -y --no-install-recommends \
-#        octave liboctave-dev \
-#        gnuplot-x11 \
-#        libopenblas-base libatlas3-base \
-#        ghostscript pstoedit && \
-#    pip install -U sympy && \
-#    octave --eval 'pkg install -forge struct parallel symbolic odepkg' && \
-#    pip3 install -U octave_kernel && \
-#    python3 -m octave_kernel.install && \
-#    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+# Install IJulia as jovyan and then move the kernelspec out
+# to the system share location. Avoids problems with runtime UID change not
+# taking effect properly on the .local folder in the jovyan home dir.
+RUN julia -e 'import Pkg; Pkg.update()' && \
+     (test $TEST_ONLY_BUILD || julia -e 'import Pkg; Pkg.add("HDF5")') && \
+         julia -e "using Pkg; pkg\"add Gadfly RDatasets IJulia InstantiateFromURL\"; pkg\"precompile\"" && \ 
+    # move kernelspec out of home \
+    mv $HOME/.local/share/jupyter/kernels/julia* $CONDA_DIR/share/jupyter/kernels/ && \
+    chmod -R go+rx $CONDA_DIR/share/jupyter && \
+    rm -rf $HOME/.local && \
+    fix-permissions $JULIA_PKGDIR $CONDA_DIR/share/jupyter
 
-# Original snippet for octave
-#USER root
-#WORKDIR /tmp
-#
-## Install octave and octave_kernel
-#RUN apt-get update && \
-#    apt-get install -y --no-install-recommends \
-#        build-essential make \
-#        octave liboctave-dev \
-#        gnuplot-x11 \
-#        libopenblas-base libatlas3-base \
-#        ghostscript pstoedit && \
-#    pip install -U sympy && \
-#    octave --eval 'pkg install -forge struct parallel symbolic odepkg' && \
-#    pip3 install -U octave_kernel && \
-#    python3 -m octave_kernel.install && \
-#    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
 
 
 USER $NB_UID
