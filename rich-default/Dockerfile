@@ -91,7 +91,8 @@ RUN conda install --quiet --yes \
     'r-htmltools' \
     'r-sparklyr' \
     'r-htmlwidgets' \
-    'r-hexbin' && \
+    'r-hexbin' \
+    'r-essentials' && \
     # Update the pinned version of Python
     conda list python | grep '^python ' | tr -s ' ' | cut -d '.' -f 1,2 | sed 's/$/.*/' >> $CONDA_DIR/conda-meta/pinned && \
     conda clean --all -f -y && \
@@ -126,12 +127,21 @@ RUN MPLBACKEND=Agg python -c "import matplotlib.pyplot" && \
     fix-permissions /home/$NB_USER
 
 USER root
-# Install SageMath
+# Install SageMath and its dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
+    m4 \
     sagemath \
-    sagemath-jupyter && \
+    sagemath-jupyter \
+    sagemath-doc-en  && \
     rm -rf /var/lib/apt/lists/*
 
+# Links Sage to Python 2 instead of Python 3
+# Replaces the first line of the sage-ipython file to recognize
+# the Python 2 environment
+RUN sed -i -e '1s:#!/usr/bin/env python:#!/usr/bin/env python2:' /usr/share/sagemath/bin/sage-ipython
+
+# Links the Sage kernel to Python 2 instead of Python 3 by editing the json file
+RUN sed -i 's/--python/--python2/' /usr/share/jupyter/kernels/sagemath/kernel.json
 
 # Julia dependencies
 # # install Julia packages in /opt/julia instead of $HOME
@@ -174,7 +184,18 @@ RUN julia -e 'import Pkg; Pkg.update()' && \
     rm -rf $HOME/.local && \
     fix-permissions $JULIA_PKGDIR $CONDA_DIR/share/jupyter
 
-
+# The following is an attempt to configure nb_conda_kernels automatically
+#WORKDIR $HOME
+#
+#USER root
+#
+#RUN echo "test" > $HOME/test.txt
+#
+## Create a folder of conda environments in the user's directory
+#RUN conda config && \
+#    > $HOME/.condarc && \
+#    echo "envs_dirs:" >> $HOME/.condarc && \
+#    echo "  -/home/jovyan/my-conda-envs/" >> $HOME/.condarc
 
 
 USER $NB_UID
