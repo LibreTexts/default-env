@@ -23,9 +23,8 @@ environment. Note that your version numbers may differ.
    nb_conda_kernels          2.2.2                    py36_0    conda-forge
    ```
 
-1. In your home directory, run `conda config`.
-   Using a text editor like `nano`, replace the contents of `~.condarc`
-with the following:
+1. In your home directory, run `conda config`. This will create a file called
+`.condarc` in your home directory. We want the following to be inside that file:
    ```
    envs_dirs:
      - /home/jovyan/my-conda-envs/
