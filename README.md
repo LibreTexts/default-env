@@ -65,4 +65,4 @@ the Notebook can import the packages that you installed before.
 * You can see a list of your conda environments by running
 `conda env list`.
 * To add more packages to your conda environment, run
-`conda install -p </path/to/env> <package>.
+`conda install -p </path/to/env> <package>`.
