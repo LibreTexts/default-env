@@ -79,7 +79,10 @@ RUN conda install --quiet --yes \
     'r-devtools' \
     'r-tidyverse' \
     'r-shiny' \
+    'r-shinydashboard' \
     'r-rmarkdown' \
+    'r-leaflet' \
+    'r-httr' \
     'r-forecast' \
     'r-rsqlite' \
     'r-reshape2' \
