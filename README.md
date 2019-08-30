@@ -16,45 +16,50 @@ Kept as a reference for now.
 Based on the [documentation](https://zero-to-jupyterhub.readthedocs.io/en/latest/user-environment.html?highlight=conda%20environments#allow-users-to-create-their-own-conda-environments-for-notebooks)
 from *Zero to JupyterHub with Kubernetes*.
 
-Make sure that `nb_conda_kernels` is installed in the root conda
-environment.
-```
-$ conda list -n base | grep "nb_conda_kernels"
-nb_conda_kernels          2.2.2                    py36_0    conda-forge
-```
-Your version numbers may differ.
+1. Make sure that `nb_conda_kernels` is installed in the root conda
+environment. Note that your version numbers may differ.
+   ```
+   $ conda list -n base | grep "nb_conda_kernels"
+   nb_conda_kernels          2.2.2                    py36_0    conda-forge
+   ```
 
-In your home directory, run `conda config`.
-Using a text editor like `nano`, replace the contents of `~.condarc`
-with the following:
-```
-envs_dirs:
-  - /home/jovyan/my-conda-envs/
-```
+1. In your home directory, run `conda config`. This will create a file called
+`.condarc` in your home directory. We want the following to be inside that file:
+   ```
+   envs_dirs:
+     - /home/jovyan/my-conda-envs/
+   ```
+
+   *Alternately*, you can do this the fast way by running the following:
+   ```
+   conda config
+   echo "envs_dirs:" > ~/.condarc 
+   echo "  - /home/jovyan/my-conda-envs/" >> ~/.condarc
+   ```
 
 ### Creating your own conda environment
 
-Open the Terminal from the Launcher and run the command
+1. Open the Terminal from the Launcher and run the command
 to create a conda environment.
-```
-conda create -n <your_env_name> <kernel> <packages>
-```
+   ```
+   conda create -n <your_env_name> <kernel> <packages>
+   ```
 
-For example, to create a conda environment for Python, run
+   For example, to create a conda environment for Python, run
 `conda create -n my_python_env ipykernel`.
-If you want the `pendulum` package with Python, then run
+   If you want the `pendulum` package with Python, then run
 `conda create -n my_python_env ipykernel pendulum`.
 
-All conda environments will be saved in a folder in
+   All conda environments will be saved in a folder in
 your home directory called `my-conda-envs`.
 
-Activate your conda environment by running 
+1. Activate your conda environment by running 
 `source activate <your_env_name>`.
 
-You can install additional packages while your environment is
+   You can install additional packages while your environment is
 activated.
 
-Deactivate your current conda environment by running
+1. Deactivate your current conda environment by running
 `deactivate` or `source deactivate`.
 
 Your Launcher should show another Notebook labeled with your
