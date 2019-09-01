@@ -37,7 +37,8 @@ USER $NB_UID
 # so manually downgrading to Python 3.6.*
 RUN conda install --quiet --yes \
     'conda-forge::blas=*=openblas' \
-    'python=3.6.*' \ 
+    'python=3.6.*' \
+    'jupyterlab=1.1.1' \ 
     'ipywidgets' \
     'pandas' \
     'numexpr' \
@@ -94,8 +95,7 @@ RUN conda install --quiet --yes \
     'r-htmltools' \
     'r-sparklyr' \
     'r-htmlwidgets' \
-    'r-hexbin' \
-    'r-essentials' && \
+    'r-hexbin' && \
     # Update the pinned version of Python
     conda list python | grep '^python ' | tr -s ' ' | cut -d '.' -f 1,2 | sed 's/$/.*/' >> $CONDA_DIR/conda-meta/pinned && \
     conda clean --all -f -y && \
