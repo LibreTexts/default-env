@@ -187,6 +187,26 @@ RUN julia -e 'import Pkg; Pkg.update()' && \
     rm -rf $HOME/.local && \
     fix-permissions $JULIA_PKGDIR $CONDA_DIR/share/jupyter
 
+# Install RStudio and its Jupyter extension, made available by interchanging
+# /lab with /rstudio in the URL.
+
+# Installs RStudio
+USER root
+RUN apt-get update && \
+    curl --silent -L --fail https://download2.rstudio.org/rstudio-server-1.1.419-amd64.deb > /tmp/rstudio.deb && \
+    echo '24cd11f0405d8372b4168fc9956e0386 /tmp/rstudio.deb' | md5sum -c - && \
+    apt-get install -y /tmp/rstudio.deb && \
+    rm /tmp/rstudio.deb && \
+    apt-get clean
+ENV PATH=$PATH:/usr/lib/rstudio-server/bin
+
+# Installs the jupyter-rsession-proxy extension
+RUN conda install -yq -c conda-forge jupyter-rsession-proxy && \
+    conda clean -tipsy
+
+USER $NB_USER
+
+
 # The following is an attempt to configure nb_conda_kernels automatically
 #WORKDIR $HOME
 #
