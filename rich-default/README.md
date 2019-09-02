@@ -7,8 +7,13 @@ and
 It builds on top of a tagged version of the 
 [Jupyter Minimal Notebook](https://github.com/jupyter/docker-stacks/tree/master/minimal-notebook).
 
-At the moment, this contains the Python, R, Julia, 
-and Octave environments.
+At the moment, this contains the Python, R, Julia, Octave, and SageMath environments.
+Since SageMath relies on Python 2, both Python 3 and 2 are supported.
+
+## RStudio
+You can access RStudio through JupyterHub! Change `/lab` to `/rstudio` in
+the URL after spawning your server. (This [issue](https://github.com/jupyterhub/zero-to-jupyterhub-k8s/issues/990)
+helped install RStudio.)
 
 ## Packages
 As requested in
@@ -19,6 +24,7 @@ environment. Some packages come from
 
 * conda-forge::blas=*=openblas
 * python=3.6.*
+* jupyterlab=1.1.1
 * ipywidgets
 * pandas
 * numexpr
@@ -49,6 +55,7 @@ environment. Some packages come from
 * protobuf
 * xlrd
 * numba
+* altair
 
 The Octave kernel relies on these installed packages.
 * octave
@@ -77,7 +84,15 @@ These R kernel includes the following packages.
 * r-sparklyr
 * r-htmlwidgets
 * r-hexbin
+* r-httr
+* r-leaflet
+* r-shinydashboard
 
 ## Build
-To build, run `docker build -t libretexts/<image name>:<tagname> .`
+To build, run `docker build -t libretexts/<image name>:<tagname> .`.
+
+We use the image `default-env` to denote Docker builds intended for the Default
+Environment. The image `default-test` is used for temporary test Docker builds.
+
+To push to DockerHub, run `docker push libretexts/<image name>:<tagname>`.
 
