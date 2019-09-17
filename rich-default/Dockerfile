@@ -95,7 +95,11 @@ RUN conda install --quiet --yes \
     'r-htmltools' \
     'r-sparklyr' \
     'r-htmlwidgets' \
-    'r-hexbin' && \
+    'r-hexbin' \
+    'rdkit::rdkit' \
+    'samoturk::pymol' \
+    'mordred-descriptor::mordred' \
+    'pmw' && \
     # Update the pinned version of Python
     conda list python | grep '^python ' | tr -s ' ' | cut -d '.' -f 1,2 | sed 's/$/.*/' >> $CONDA_DIR/conda-meta/pinned && \
     conda clean --all -f -y && \
@@ -203,6 +207,16 @@ ENV PATH=$PATH:/usr/lib/rstudio-server/bin
 # Installs the jupyter-rsession-proxy extension
 RUN conda install -yq -c conda-forge jupyter-rsession-proxy && \
     conda clean -tipsy
+
+# Install pymol
+#RUN conda install -yq -c schrodinger pymol
+
+# Install ipymol
+# Installs from a git repo because pymol fetch fails when installing the pip package
+RUN pip install git+https://github.com/cxhernandez/ipymol.git@2a30d6ec1588434e6f0f72a1d572444f89ff535b
+
+RUN pip install pypdb
+RUN pip install biopandas
 
 USER $NB_USER
 
