@@ -1,6 +1,13 @@
-# default-env
+# LibreTexts JupyterHub Default Environment
 
-At the moment, this contains two default Jupyter environments.
+This repository contains the Docker files needed to build the default Jupyter
+environment available at jupyter.libretexts.org. The goal of this environment
+is to contain as many of the most popular software packages needed for
+scientific computing from a variety of languages: Python, R, Octave, Sage,
+Julia, etc. These packages will be updated to the latest compatible versions on
+a quarterly basis.
+
+At the moment, this repository contains two Jupyter environments.
 
 * **Minimum Default** contains all requested packages,
 with only a Python environment.
@@ -11,7 +18,40 @@ with the Python, R, Julia, Octave, and Sage environments.
 a Docker image. It failed to install packages in the root environment.
 Kept as a reference for now.
 
+# Requesting additional installed packages
+
+In general, we will install any user requested software available in the
+[Ubuntu 18.04 LTS apt repositories](https://packages.ubuntu.com/bionic/>) or
+from the Conda [conda-forge channel](https://conda-forge.org/feedstocks/>) The
+conda installed packages, in general, will be the default programs accessible
+at the JupyterLab command line. The latest *compatible* versions of the
+requested packages will be installed. To request packages you can:
+
+1. make a pull request to this repository adding your desired packages to the
+   [Dockerfile](https://github.com/LibreTexts/default-env/blob/master/rich-default/Dockerfile>),
+2. open an issue on this repository with the desired packages, or
+3. send an email to jupyterteam@ucdavis.edu with a list of the desired packages.
+
+If your desired package is not available in the default apt repositories or the
+Conda Forge Conda channel, you have these options for supporting your software
+needs:
+
+1. [submit the package for inclusion in Conda Forge channel](https://conda-forge.org/#contribute),
+2. install the package manually after launching the default environment (you
+   must ensure the package is installed in the user directory for persistence
+   among sessions), or
+3. create your own [repo2docker compatible
+   environment](https://repo2docker.readthedocs.io/en/latest/config_files.html)
+   and send us the URL of the Git repository with your configuration files.
+
+Note that we will not install "un-released" software from arbitrary locations
+in the default environment, but you may do so using options 2 and 3 above. We
+will consider installing packages from PyPi, CRAN, and other language specific
+package managers on a case-by-case basis for temporary use until it is added to
+Conda Forge.
+
 ## Creating your own custom conda environment
+
 ### Configuring `nb_conda_kernels`
 Based on the [documentation](https://zero-to-jupyterhub.readthedocs.io/en/latest/user-environment.html?highlight=conda%20environments#allow-users-to-create-their-own-conda-environments-for-notebooks)
 from *Zero to JupyterHub with Kubernetes*.
