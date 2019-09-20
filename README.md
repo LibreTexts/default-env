@@ -39,7 +39,7 @@ needs:
 1. [submit the package for inclusion in Conda Forge channel](https://conda-forge.org/#contribute),
 2. install the package manually after launching the default environment (you
    must ensure the package is installed in the user directory for persistence
-   among sessions), or
+   among sessions with custom conda environments), or
 3. create your own [repo2docker compatible
    environment](https://repo2docker.readthedocs.io/en/latest/config_files.html)
    and send us the URL of the Git repository with your configuration files.
