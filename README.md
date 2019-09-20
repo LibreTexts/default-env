@@ -21,14 +21,14 @@ Kept as a reference for now.
 # Requesting additional installed packages
 
 In general, we will install any user requested software available in the
-[Ubuntu 18.04 LTS apt repositories](https://packages.ubuntu.com/bionic/>) or
-from the Conda [conda-forge channel](https://conda-forge.org/feedstocks/>) The
+[Ubuntu 18.04 LTS apt repositories](https://packages.ubuntu.com/bionic/) or
+from the Conda [conda-forge channel](https://conda-forge.org/feedstocks/) The
 conda installed packages, in general, will be the default programs accessible
 at the JupyterLab command line. The latest *compatible* versions of the
 requested packages will be installed. To request packages you can:
 
 1. make a pull request to this repository adding your desired packages to the
-   [Dockerfile](https://github.com/LibreTexts/default-env/blob/master/rich-default/Dockerfile>),
+   [Dockerfile](https://github.com/LibreTexts/default-env/blob/master/rich-default/Dockerfile),
 2. open an issue on this repository with the desired packages, or
 3. send an email to jupyterteam@ucdavis.edu with a list of the desired packages.
 
