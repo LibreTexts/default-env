@@ -29,6 +29,10 @@ RUN apt-get update && \
     gcc && \
     rm -rf /var/lib/apt/lists/*
 
+RUN apt-get update && \
+    apt install -y --no-install-recommends octave octave-control octave-image octave-io octave-optim octave-signal octave-statistics && \
+    rm -rf /var/lib/apt/lists/*
+
 USER $NB_UID
 
 # Install Python 3 packages
@@ -69,7 +73,6 @@ RUN conda install --quiet --yes \
     'protobuf' \
     'xlrd' \
     'numba' \
-    'octave' \
     'gnuplot' \
     'ghostscript' \
     'octave_kernel' \
