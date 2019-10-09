@@ -46,6 +46,8 @@ RUN conda install --quiet --yes \
     'ipywidgets' \
     'pythreejs' \
     'ipyleaflet' \
+    'resonance' \
+    'opty' \
     'pandas' \
     'pydy' \
     'numexpr' \
