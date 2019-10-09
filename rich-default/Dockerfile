@@ -30,7 +30,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 RUN apt-get update && \
-    apt install -y --no-install-recommends octave octave-control octave-image octave-io octave-optim octave-signal octave-statistics && \
+    apt install -y --no-install-recommends octave octave-* && \
     rm -rf /var/lib/apt/lists/*
 
 USER $NB_UID
