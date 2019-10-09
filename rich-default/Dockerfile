@@ -47,6 +47,7 @@ RUN conda install --quiet --yes \
     'pythreejs' \
     'ipyleaflet' \
     'pandas' \
+    'pydy' \
     'numexpr' \
     'matplotlib' \
     'scipy' \
