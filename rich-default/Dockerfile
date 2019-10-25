@@ -52,7 +52,7 @@ USER $NB_UID
 RUN conda install --quiet --yes \
     'conda-forge::blas=*=openblas' \
     'python=3.6.*' \
-    'jupyterlab=1.1.1' \ 
+    'jupyterlab=1.1.1' \
     'ipywidgets' \
     'pythreejs' \
     'ipyleaflet' \
