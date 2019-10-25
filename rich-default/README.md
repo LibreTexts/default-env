@@ -89,10 +89,10 @@ These R kernel includes the following packages.
 * r-shinydashboard
 
 ## Build
-To build, run `docker build -t libretexts/<image name>:<tagname> .`.
+To build, run `docker build -t libretexts/<image name>:<tagname> .`
 
 We use the image `default-env` to denote Docker builds intended for the Default
 Environment. The image `default-test` is used for temporary test Docker builds.
 
-To push to DockerHub, run `docker push libretexts/<image name>:<tagname>`.
+To push to DockerHub, run `docker push libretexts/<image name>:<tagname>`
 
