@@ -16,22 +16,32 @@ LABEL maintainer="Libretexts Jupyter Team <libretextsteam@gmail.com>"
 
 USER root
 
-# ffmpeg for matplotlib anim
+# Install ffmpeg for matplotlib anim
+# Install R prerequisites: fonts-dejavu, gfortran, gcc
+# Install Octave and its prerequisites: octave, octave-control
+# octave-image, octave-io, octave-optim, octave-signal, octave-statistics
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends ffmpeg && \
-    rm -rf /var/lib/apt/lists/*
-
-# R prerequisites
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
+    apt-get install -y --no-install-recommends ffmpeg \
     fonts-dejavu \
     gfortran \
-    gcc && \
+    gcc \
+    octave \
+    octave-* && \
     rm -rf /var/lib/apt/lists/*
 
-RUN apt-get update && \
-    apt install -y --no-install-recommends octave octave-control octave-image octave-io octave-optim octave-signal octave-statistics && \
-    rm -rf /var/lib/apt/lists/*
+#RUN apt-get update && \
+#    apt-get install -y --no-install-recommends ffmpeg \
+#    fonts-dejavu \
+#    gfortran \
+#    gcc \
+#    octave \
+#    octave-control \
+#    octave-image \
+#    octave-io \
+#    octave-optim \
+#    octave-signal\
+#    octave-statistics && \
+#    rm -rf /var/lib/apt/lists/*
 
 USER $NB_UID
 
@@ -44,7 +54,12 @@ RUN conda install --quiet --yes \
     'python=3.6.*' \
     'jupyterlab=1.1.1' \ 
     'ipywidgets' \
+    'pythreejs' \
+    'ipyleaflet' \
+    'resonance' \
+    'opty' \
     'pandas' \
+    'pydy' \
     'numexpr' \
     'matplotlib' \
     'scipy' \
