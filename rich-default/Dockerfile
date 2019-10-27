@@ -25,8 +25,7 @@ RUN apt-get update && \
     fonts-dejavu \
     gfortran \
     gcc \
-    octave \
-    octave-* && \
+    octave && \
     rm -rf /var/lib/apt/lists/*
 
 #RUN apt-get update && \
