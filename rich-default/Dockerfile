@@ -20,13 +20,16 @@ USER root
 # Install R prerequisites: fonts-dejavu, gfortran, gcc
 # Install Octave and its prerequisites: octave, octave-control
 # octave-image, octave-io, octave-optim, octave-signal, octave-statistics
+# vim added to 1.9, staging jupyter not working
 RUN apt-get update && \
     apt-get install -y --no-install-recommends ffmpeg \
     fonts-dejavu \
     gfortran \
     gcc \
     octave \
-    octave-* && \
+    vim \
+    octave-* \
+    texlive-full && \ 
     rm -rf /var/lib/apt/lists/*
 
 #RUN apt-get update && \
@@ -49,11 +52,15 @@ USER $NB_UID
 # Notes: 
 # octave_kernel isn't compatible with Python> 3.7 as pinned in the base-notebook,
 # so manually downgrading to Python 3.6.*
+# r-sf added in 1.9, staging jupyter not working
+# nodejs and ipyml added in 1.9, staging jupyter not working 
 RUN conda install --quiet --yes \
     'conda-forge::blas=*=openblas' \
     'python=3.6.*' \
-    'jupyterlab=1.1.1' \
+    'jupyterlab=1.*' \
+    'nbconvert=5.4.*' \
     'ipywidgets' \
+    'ipympl' \
     'pythreejs' \
     'ipyleaflet' \
     'resonance' \
@@ -62,6 +69,7 @@ RUN conda install --quiet --yes \
     'pydy' \
     'numexpr' \
     'matplotlib' \
+    'nodejs' \
     'scipy' \
     'seaborn' \
     'scikit-learn' \
@@ -114,6 +122,7 @@ RUN conda install --quiet --yes \
     'r-sparklyr' \
     'r-htmlwidgets' \
     'r-hexbin' \
+    'r-sf' \
     'rdkit::rdkit' \
     'samoturk::pymol' \
     'mordred-descriptor::mordred' \
@@ -126,8 +135,10 @@ RUN conda install --quiet --yes \
     # Also activate ipywidgets extension for JupyterLab
     # Check this URL for most recent compatibilities
     # https://github.com/jupyter-widgets/ipywidgets/tree/master/packages/jupyterlab-manager
+    # jupyter lab matplotlibextension added to 1.9, staging jupyter not working
     jupyter labextension install @jupyter-widgets/jupyterlab-manager@^1.0.1 --no-build && \
     jupyter labextension install jupyterlab_bokeh@1.0.0 --no-build && \
+    jupyter labextension install jupyter-matplotlib@0.5.0 --no-build && \
     jupyter lab build --dev-build=False && \
     npm cache clean --force && \
     rm -rf $CONDA_DIR/share/jupyter/lab/staging && \
@@ -254,3 +265,8 @@ USER $NB_USER
 
 
 USER $NB_UID
+
+# for some reason, need to rebuild it to make widgets work
+RUN jupyter labextension install jupyter-matplotlib@0.5.0 --no-build
+RUN jupyter lab build
+
