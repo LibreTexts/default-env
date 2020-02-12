@@ -130,12 +130,12 @@ USER $NB_UID
 #    # Update the pinned version of Python
 #    conda list python | grep '^python ' | tr -s ' ' | cut -d '.' -f 1,2 | sed 's/$/.*/' >> $CONDA_DIR/conda-meta/pinned && \
 #COPY package-list.txt /data/package-list.txt
-COPY environment.yml /data/environment.yml
+COPY environment.yml environment.yml
 
 #RUN conda env create -n base -f /data/environment.yml 
 
 #RUN conda run -n base && \
-RUN conda env update --name base --file /data/environment.yml --prune && \
+RUN conda env update --name base --file environment.yml --prune && \
 #RUN conda env create -f /data/environment.yml &&\
     conda clean --all -f -y && \
     # Activate ipywidgets extension in the environment that runs the notebook server
