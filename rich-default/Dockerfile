@@ -132,7 +132,10 @@ USER $NB_UID
 #COPY package-list.txt /data/package-list.txt
 COPY environment.yml /data/environment.yml
 
-RUN conda env update --prefix base --file /data/environment.yml --prune && \
+#RUN conda env create -n base -f /data/environment.yml 
+
+#RUN conda run -n base && \
+RUN conda env update --name base --file /data/environment.yml --prune && \
 #RUN conda env create -f /data/environment.yml &&\
     conda clean --all -f -y && \
     # Activate ipywidgets extension in the environment that runs the notebook server
