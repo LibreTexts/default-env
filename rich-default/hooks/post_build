@@ -1,0 +1,11 @@
+#!/bin/bash
+set -e
+
+# Adapted from the Jupyter Docker Stacks repository
+# Example: https://github.com/jupyter/docker-stacks/blob/master/datascience-notebook/hooks/post_push
+
+# Tag the latest build with the short git sha. Push the tag in addition
+# to the "latest" tag already pushed.
+GIT_SHA_TAG=${SOURCE_COMMIT:0:12}
+docker tag $IMAGE_NAME $DOCKER_REPO:$GIT_SHA_TAG
+docker push $DOCKER_REPO:$GIT_SHA_TAG
