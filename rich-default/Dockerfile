@@ -32,111 +32,11 @@ RUN apt-get update && \
     texlive-full && \ 
     rm -rf /var/lib/apt/lists/*
 
-#RUN apt-get update && \
-#    apt-get install -y --no-install-recommends ffmpeg \
-#    fonts-dejavu \
-#    gfortran \
-#    gcc \
-#    octave \
-#    octave-control \
-#    octave-image \
-#    octave-io \
-#    octave-optim \
-#    octave-signal\
-#    octave-statistics && \
-#    rm -rf /var/lib/apt/lists/*
-
 USER $NB_UID
 
-# Install Python 3 packages
-# Notes: 
-# octave_kernel isn't compatible with Python> 3.7 as pinned in the base-notebook,
-# so manually downgrading to Python 3.6.*
-# r-sf added in 1.9, staging jupyter not working
-# nodejs and ipyml added in 1.9, staging jupyter not working 
-#RUN conda install --quiet --yes \
-#    'conda-forge::blas=*=openblas' \
-#    'python=3.6.*' \
-#    'jupyterlab=1.*' \
-#    'nbconvert=5.4.*' \
-#    'ipywidgets' \
-#    'ipympl' \
-#    'pythreejs' \
-#    'ipyleaflet' \
-#    'resonance' \
-#    'opty' \
-#    'pandas' \
-#    'pydy' \
-#    'numexpr' \
-#    'matplotlib' \
-#    'nodejs' \
-#    'scipy' \
-#    'seaborn' \
-#    'scikit-learn' \
-#    'scikit-image' \
-#    'sympy' \
-#    'cython' \
-#    'numba' \
-#    'bokeh' \
-#    'numpy' \
-#    'astropy' \
-#    'bqplot' \
-#    'nb_conda_kernels' \
-#    'statsmodels' \
-#    'patsy' \
-#    'requests' \
-#    'cloudpickle' \
-#    'dill' \
-#    'dask' \
-#    'sqlalchemy*' \
-#    'hdf5' \
-#    'h5py' \
-#    'vincent' \
-#    'beautifulsoup4' \
-#    'protobuf' \
-#    'xlrd' \
-#    'numba' \
-#    'gnuplot' \
-#    'ghostscript' \
-#    'octave_kernel' \
-#    'rpy2' \
-#    'r-base' \
-#    'r-irkernel' \
-#    'r-plyr' \
-#    'r-devtools' \
-#    'r-tidyverse' \
-#    'r-shiny' \
-#    'r-shinydashboard' \
-#    'r-rmarkdown' \
-#    'r-leaflet' \
-#    'r-httr' \
-#    'r-forecast' \
-#    'r-rsqlite' \
-#    'r-reshape2' \
-#    'r-nycflights13' \
-#    'r-caret' \
-#    'r-rcurl' \
-#    'r-crayon' \
-#    'r-randomforest' \
-#    'r-htmltools' \
-#    'r-sparklyr' \
-#    'r-htmlwidgets' \
-#    'r-hexbin' \
-#    'r-sf' \
-#    'rdkit::rdkit' \
-#    'samoturk::pymol' \
-#    'mordred-descriptor::mordred' \
-#    'pmw' && \
-#    # Update the pinned version of Python
-#    conda list python | grep '^python ' | tr -s ' ' | cut -d '.' -f 1,2 | sed 's/$/.*/' >> $CONDA_DIR/conda-meta/pinned && \
-#COPY package-list.txt /data/package-list.txt
 COPY environment.yml environment.yml
 
-#RUN conda env create -n base -f /data/environment.yml 
-
-#RUN conda run -n base && \
 RUN conda env update --name base --file environment.yml --prune && \
-#RUN conda env create -f /data/environment.yml &&\
     conda clean --all -f -y && \
     # Activate ipywidgets extension in the environment that runs the notebook server
     jupyter nbextension enable --py widgetsnbextension --sys-prefix && \
@@ -240,37 +140,6 @@ RUN apt-get update && \
     rm /tmp/rstudio.deb && \
     apt-get clean
 ENV PATH=$PATH:/usr/lib/rstudio-server/bin
-
-# Installs the jupyter-rsession-proxy extension
-RUN conda install -yq -c conda-forge jupyter-rsession-proxy && \
-    conda clean -tipsy
-
-# Install pymol
-#RUN conda install -yq -c schrodinger pymol
-
-# Install ipymol
-# Installs from a git repo because pymol fetch fails when installing the pip package
-RUN pip install git+https://github.com/cxhernandez/ipymol.git@2a30d6ec1588434e6f0f72a1d572444f89ff535b
-
-RUN pip install pypdb
-RUN pip install biopandas
-
-USER $NB_USER
-
-
-# The following is an attempt to configure nb_conda_kernels automatically
-#WORKDIR $HOME
-#
-#USER root
-#
-#RUN echo "test" > $HOME/test.txt
-#
-## Create a folder of conda environments in the user's directory
-#RUN conda config && \
-#    > $HOME/.condarc && \
-#    echo "envs_dirs:" >> $HOME/.condarc && \
-#    echo "  -/home/jovyan/my-conda-envs/" >> $HOME/.condarc
-
 
 USER $NB_UID
 
