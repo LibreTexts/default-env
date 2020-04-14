@@ -126,7 +126,12 @@ RUN conda install --quiet --yes \
     'rdkit::rdkit' \
     'samoturk::pymol' \
     'mordred-descriptor::mordred' \
-    'pmw' && \
+    'pmw' \
+    'cartopy' \
+    'palettable' \
+    'xarray' \
+    'packaging' \
+    'gmt' && \
     # Update the pinned version of Python
     conda list python | grep '^python ' | tr -s ' ' | cut -d '.' -f 1,2 | sed 's/$/.*/' >> $CONDA_DIR/conda-meta/pinned && \
     conda clean --all -f -y && \
