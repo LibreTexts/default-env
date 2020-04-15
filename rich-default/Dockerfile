@@ -131,7 +131,8 @@ RUN conda install --quiet --yes \
     'palettable' \
     'xarray' \
     'packaging' \
-    'gmt' && \
+    'gmt' \
+    'ipympl=0.4.*' && \
     # Update the pinned version of Python
     conda list python | grep '^python ' | tr -s ' ' | cut -d '.' -f 1,2 | sed 's/$/.*/' >> $CONDA_DIR/conda-meta/pinned && \
     conda clean --all -f -y && \
@@ -251,6 +252,7 @@ RUN pip install git+https://github.com/cxhernandez/ipymol.git@2a30d6ec1588434e6f
 
 RUN pip install pypdb
 RUN pip install biopandas
+RUN pip install pyshtools
 
 USER $NB_USER
 
