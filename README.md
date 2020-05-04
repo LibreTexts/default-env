@@ -54,7 +54,8 @@ Conda Forge.
 
 ### Configuring `nb_conda_kernels`
 Based on the [documentation](https://zero-to-jupyterhub.readthedocs.io/en/latest/user-environment.html?highlight=conda%20environments#allow-users-to-create-their-own-conda-environments-for-notebooks)
-from *Zero to JupyterHub with Kubernetes*.
+from *Zero to JupyterHub with Kubernetes* and 
+[nb_conda_kernels](https://github.com/Anaconda-Platform/nb_conda_kernels).
 
 1. Make sure that `nb_conda_kernels` is installed in the root conda
 environment. Note that your version numbers may differ.
@@ -79,19 +80,26 @@ environment. Note that your version numbers may differ.
 
 ### Creating your own conda environment
 
-1. Open the Terminal from the Launcher and run the command
-to create a conda environment.
+1. Open the Terminal from the Launcher and create a conda environment.
+   [Specify your Jupyter kernel](https://github.com/jupyter/jupyter/wiki/Jupyter-kernels) 
+   (in other words, the language you wish to use) and the packages 
+   you wish to add.
    ```
    conda create -n <your_env_name> <kernel> <packages>
    ```
-
-   For example, to create a conda environment for Python, run
-`conda create -n my_python_env ipykernel`.
-   If you want the `pendulum` package with Python, then run
-`conda create -n my_python_env ipykernel pendulum`.
-
+   For example, to create an R environment with the package r-leaflet, run
+   `conda create -n r_leaflet_env r-irkernel r-leaflet`.
+   
    All conda environments will be saved in a folder in
-your home directory called `my-conda-envs`.
+   your home directory called `my-conda-envs`.
+   
+   > **Technical note:** If creating an environment using the IPython kernel,
+     you can also simply specify the `nb_conda_kernels` package instead
+     of the kernel by running 
+     `conda create -n <your_python_env_name> <packages> nb_conda_kernels`
+     For example, to use tensorflow, you can run 
+     `conda create -n tensorflow_env ipykernel tensorflow` or
+     `conda create -n tensorflow_env tensorflow nb_conda_kernels`
 
 1. Activate your conda environment by running 
 `source activate <your_env_name>`.
