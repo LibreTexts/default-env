@@ -47,6 +47,7 @@ RUN conda env update --name base --file environment.yml --prune && \
     jupyter labextension install @jupyter-widgets/jupyterlab-manager@^1.0.1 --no-build && \
     jupyter labextension install jupyterlab_bokeh@1.0.0 --no-build && \
     jupyter labextension install jupyter-matplotlib@0.5.0 --no-build && \
+    jupyter labextension install @jupyterlab/server-proxy@2.0.1 --no-build && \
     jupyter lab build --dev-build=False && \
     npm cache clean --force && \
     rm -rf $CONDA_DIR/share/jupyter/lab/staging && \
