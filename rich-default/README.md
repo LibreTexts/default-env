@@ -19,6 +19,7 @@ To test, go to staging jupyter on rooster, replace the tag name in the yaml file
 ## Production
 After testing, change the Default Environment on the production cluster by editing config.yaml and replacing the tag name with an updated version number. 
 
+```
 singleuser:
   defaultUrl: "/lab"
   ...
@@ -30,6 +31,7 @@ singleuser:
       description: "With Python, R, Julia, Octave, and SageMath. Includes packages requested by the community."
       default: true
   ...
+  ```
 
 ### RStudio
 You can access RStudio through JupyterHub! Change /lab to /rstudio in the URL after spawning your server. (This issue helped install RStudio.)
