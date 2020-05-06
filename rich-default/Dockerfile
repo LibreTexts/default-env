@@ -29,7 +29,77 @@ RUN apt-get update && \
     octave \
     vim \
     octave-* \
-    texlive-full && \ 
+    asymptote \
+    biber \
+    chktex \
+    cm-super \
+    context \
+    dvidvi \
+    dvipng \
+    feynmf \
+    fragmaster \
+    info \
+    lacheck \
+    latex-cjk-all \
+    latexdiff \
+    latexmk \
+    lcdf-typetools \
+    lmodern \
+    prerex \
+    psutils \
+    purifyeps \
+    t1utils \
+    tex-gyre \
+    texinfo \
+    texlive-base \
+    texlive-bibtex-extra \
+    texlive-binaries \
+    texlive-extra-utils \
+    texlive-font-utils \
+    texlive-fonts-recommended \
+    texlive-fonts-recommended-doc \
+    texlive-games \
+    texlive-humanities \
+    texlive-lang-arabic \
+    texlive-lang-chinese \
+    texlive-lang-cjk \
+    texlive-lang-cyrillic \
+    texlive-lang-czechslovak \
+    texlive-lang-english \
+    texlive-lang-european \
+    texlive-lang-french \
+    texlive-lang-german \
+    texlive-lang-greek \
+    texlive-lang-italian \
+    texlive-lang-japanese \
+    texlive-lang-korean \
+    texlive-lang-other \
+    texlive-lang-polish \
+    texlive-lang-portuguese \
+    texlive-lang-spanish \
+    texlive-latex-base \
+    texlive-latex-base-doc \
+    texlive-latex-extra \
+    texlive-latex-extra-doc \
+    texlive-latex-recommended \
+    texlive-latex-recommended-doc \
+    texlive-luatex \
+    texlive-metapost \
+    texlive-metapost-doc \
+    texlive-music \
+    texlive-pictures \
+    texlive-pictures-doc \
+    texlive-plain-generic \
+    texlive-pstricks \
+    texlive-pstricks-doc \
+    texlive-publishers \
+    texlive-publishers-doc \
+    texlive-science \
+    texlive-science-doc \
+    texlive-xetex \
+    tipa \
+    vprerex \
+    xindy && \ 
     rm -rf /var/lib/apt/lists/*
 
 USER $NB_UID
