@@ -21,6 +21,7 @@ dependencies:
   - beautifulsoup4=4.9.0
   - binutils_impl_linux-64=2.34
   - binutils_linux-64=2.34
+  - biopandas=0.2.5
   - blas=2.14
   - bleach=3.1.4
   - blinker=1.4
@@ -258,10 +259,12 @@ dependencies:
   - pymol=1.9.0.0
   - pyopenssl=19.1.0
   - pyparsing=2.4.7
+  - pypdb=1.300
   - pyproj=2.6.0
   - pyqt=5.12.3
   - pyrsistent=0.16.0
   - pyshp=2.1.0
+  - pyshtools=4.6.2
   - pysocks=1.7.1
   - python=3.6.10
   - python-dateutil=2.8.1
@@ -526,6 +529,7 @@ dependencies:
   - xorg-renderproto=0.11.1
   - xorg-xextproto=7.3.0
   - xorg-xproto=7.0.31
+  - xmltodict=0.12.0
   - xtl=0.6.13
   - xz=5.2.5
   - yaml=0.2.3
@@ -536,12 +540,7 @@ dependencies:
   - zlib=1.2.11
   - zstd=1.4.4
   - pip:
-    - biopandas==0.2.5
     - ipymol==0.5
-    - pypdb==1.300
     - pyqt5-sip==4.19.18
     - pyqtwebengine==5.12.1
-    - pyshtools==4.6.2
-    - xmltodict==0.12.0
 prefix: /opt/conda
-
