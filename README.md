@@ -7,16 +7,19 @@ scientific computing from a variety of languages: Python, R, Octave, Sage,
 Julia, etc. These packages will be updated to the latest compatible versions on
 a quarterly basis.
 
-At the moment, this repository contains two Jupyter environments.
+This repository currently contains two Jupyter environments.
 
-* **Minimum Default** contains all requested packages,
-with only a Python environment.
-* **Rich Default** contains all the requested packages,
-with the Python, R, Julia, Octave, and Sage environments.
-
-**repo2docker** contains our attempt to use repo2docker to generate
+* [**Default**](./default) is the current Default Environment 
+in the LibreTexts - UC Davis JupyterHub. It contains all the 
+requested packages with the Python, R, Julia, Octave, Sage, and 
+RStudio environments.
+* [**Minimal Default**](./minimal-default) contains a select number of packages in a Python environment.
+* [**repo2docker**](./repo2docker) contains our attempt to use repo2docker to generate
 a Docker image. It failed to install packages in the root environment.
 Kept as a reference for now.
+
+If you are an administrator and want to update the Docker image, 
+take a look at [these instructions](./default/README.md).
 
 # Requesting additional installed packages
 
