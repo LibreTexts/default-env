@@ -17,8 +17,8 @@ At the moment, this contains the Python, R, Julia, Octave, and SageMath environm
 
 ### Step 2: Editing the Dockerfile and environment.yml
 1. If this is your first time editing the `Dockerfile` and the `environment.yml` spend some time reading it over and understanding how they are formatted. 
-2. If you are adding a python library, ``vim environment.yml``, and add as follows `- <library name>=<version>`. If you are adding an R package, ``vim environment.yml``, and as follows `- r-<package name>=<version>`. 
-3. If you are adding something like `vim` or `latex`, edits will be needed to be made to the `Dockerfile`. If what you are adding is the last line, then it should be added as such `<package name> && \`. Otherwise it can be added as `<package name> \`. Version specification is not needed for this part. 
+2. If you are adding something via conda, ``vim environment.yml``, and add as follows `- <library name>=<version>`. For R packages, ``vim environment.yml``, and as follows `- r-<package name>=<version>`. 
+3. If you are adding something like `vim` or `latex` which use `apt-get`, edits will be needed to be made to the `Dockerfile`. If what you are adding is the last line, then it should be added as such `<package name> && \`. Otherwise it can be added as `<package name> \`. Version specification is not needed for this part. 
 4. Check if there is a `jupyter labextension` for your package or library. It is critical that it is added to the `Dockerfile`. Version specification may be needed. 
 
 ### Step 3: Build and Push the Dockerfile
@@ -41,8 +41,13 @@ Once you have found that the test on staging was successful, you are ready to pu
 2. `docker push libretexts/default-env:<tagname>`
 3. `cd jupyterhub`
 4. `vim config.yaml`
-5. `./upgrade.sh`
-6. If `./upgrade.sh` fails the first time, try to run it a second time. 
+5. Replace the tag number in the yaml file to the tag name that you assigned to the production image
+6. `./upgrade.sh`
+7. If `./upgrade.sh` fails the first time, try to run it a second time. 
+
+### Step 6: Committing to Github
+1. Once everything has been succesfully deployed, commit your addtions to the `rich-default` directory in the `default-env` repo
+2. **Alternatively** if you submit a PR to the `default-env` repo, Docker will automatically try and build the image. This can be done ***after*** the testing stage. 
 
 ```
 singleuser:
