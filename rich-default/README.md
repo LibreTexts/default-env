@@ -49,7 +49,7 @@ Once you have found that the test on staging was successful, you are ready to pu
 1. Once everything has been succesfully deployed, commit your addtions to the `rich-default` directory in the `default-env` repo
 2. **Alternatively** if you submit a PR to the `default-env` repo, Docker will automatically try and build the image. This can be done ***after*** the testing stage. 
 
-```
+```yaml
 singleuser:
   defaultUrl: "/lab"
   ...
