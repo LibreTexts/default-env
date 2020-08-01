@@ -1,0 +1,22 @@
+#!/bin/bash -e
+
+# install some lab extensions
+
+# ipywidgets and its frontend, required by most extensions
+jupyter nbextension enable --py widgetsnbextension --sys-prefix
+jupyter labextension install @jupyter-widgets/jupyterlab-manager@^2.0 --no-build
+
+# extensions for common plotting and data visualization libraries
+jupyter labextension install jupyter-matplotlib@^0.7.3 --no-build
+jupyter labextension install @bokeh/jupyter_bokeh@^2.0.3 --no-build
+
+# add launcher icons for proxied applications like RStudio
+jupyter labextension install @jupyterlab/server-proxy@^2.1.1
+
+# finally, build the lab
+jupyter lab build --dev-build=False
+
+# add ~/.conda/envs to the top of default env directories
+# this way, newly created conda envs will be in ~
+# which will get persisted
+echo -e "envs_dirs:\n  - /home/$USER/.conda/envs" >> /srv/conda/.condarc
