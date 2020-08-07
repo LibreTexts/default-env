@@ -1,4 +1,3 @@
-name: base
 channels:
   - conda-forge
   - defaults
@@ -68,7 +67,7 @@ dependencies:
   - beautifulsoup4=4.9.1
 
   # use R from python
-  - rpy2=3.3.2
+  # - rpy2=3.3.2 # NOTE not installing since this requires R version 3.6.x, not the 4.0.x we're installing
 
   # several common data visualization packages
   - seaborn=0.10.1
@@ -99,7 +98,6 @@ dependencies:
   - h5py=2.10.0
   - pytables=3.6.1
   - hdf4=4.2.13
-  - netcdf4=1.5.4
 
   # read data from excel spreadsheets
   - xlrd=1.2.0
@@ -111,7 +109,7 @@ dependencies:
   - pydy=0.5.0
 
   # optimizing dynamic systems using direct collocation
-  - opty=1.0.0
+  # - opty=1.0.0 # NOTE not installing due to it only having packages for python up to 3.6. repackage?
 
   # common linear algebra library
   - blas=2.17
@@ -122,7 +120,10 @@ dependencies:
 
   # R
   # NOTE: the conda build pack will autoinstall irkernel and rstudio
+  # however, f**k dependency hell so we're helping it out a bit by installing irkernel and r-devtools here explicitly
   - r-essentials=4.0
+  - r-irkernel=1.1.1
+  - r-devtools=2.3.1
 
   # common package collection
   - r-tidyverse=1.3.0
@@ -139,29 +140,17 @@ dependencies:
   # R interface for apache spark
   - r-sparklyr=1.3.1
 
-  # unit root and cointegration tests for time series data
-  - r-urca=1.3_0
-
-  # misc functions like short time fourier transforms, etc
-  - r-e1071=1.7_3
-
   # simple features for spacial vector data
   - r-sf=0.9_5
-
-  # Hexagonal Binning Routines
-  - r-hexbin=1.28.1
-
-  # training and plotting classification and regression models
-  - r-caret=6.0.86
 
   # nyc flights dataset
   - r-nycflights13=1.0.1
 
   # c++ kernel
-  - xeus-cling=0.9.0
+  - xeus-cling=0.9.0 # latest version not available due to conflict with 
 
   # common c++ library
-  - boost=1.73.0
+  - boost=1.72.0 # latest version not available due to rdkit (from mordred) needing this version instead. tbh not sure if this should be a top level pkg
 
   # allow installation of pip packages
   - pip=20.1.1
