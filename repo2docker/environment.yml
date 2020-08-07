@@ -3,9 +3,11 @@ channels:
   - conda-forge
   - defaults
 dependencies:
-
   # support multiple kernels in multiple conda envs
   - nb_conda_kernels=2.2.3
+
+  # list conda dependencies, useful for debugging
+  - conda-tree=0.1.0
 
   # scipy stack for general scientific computation
   - numpy=1.19.1
@@ -13,6 +15,9 @@ dependencies:
   - matplotlib=3.3.0
   - pandas=1.1.0
   - sympy=1.6.1
+
+  # scale calculations for numpy/pandas/etc.
+  - dask=2.22.0
 
   # ipympl for matplotlib+jupyter integration
   - ipympl=0.5.7
@@ -24,25 +29,92 @@ dependencies:
   # matplotlib animation support
   - ffmpeg=4.3
 
-  # faster expression evaluator and jit compiler for numpy
+  # color palettes for matplotlib
+  - palettable=3.3.0
+
+  # faster expression evaluator, jit compiler, and array functions for numpy
   - numexpr=2.7.1
   - numba=0.50.1
+  - bottleneck=1.3.2
+
+  # extending python and allowing it to interop with C for performance
+  - cython=0.29.21
+
+  # python wrapper for ipopt for nonlinear optimization
+  - cyipopt=0.2.0
+
+  # specify molecular structures in pandas
+  - biopandas=0.2.6
+
+  # molecular descriptor calculator
+  - mordred=1.2.0
+
+  # popular python library for astronomy
+  - astropy=4.0.1.post1
+
+  # python library for cartography
+  - cartopy=0.18.0
+
+  # generic mapping tools
+  - pygmt=0.1.2
+
+  # python api for searching in the protein data bank
+  - pypdb=1.300
+
+  # spherical harmonics tools
+  - pyshtools=4.6.2
+
+  # package for parsing html
+  - beautifulsoup4=4.9.1
+
+  # use R from python
+  - rpy2=3.3.2
 
   # several common data visualization packages
   - seaborn=0.10.1
   - bokeh=2.1.1
   - bqplot=0.12.14
 
+  # python/threejs binding for jupyter visualization
+  - pythreejs=2.2.0
+
+  # interactive leaflet maps in python
+  - ipyleaflet=0.13.3
+
+  # interactive webapps in python
+  - dash=1.13.4
+
+  # python to vega translator
+  - vincent=0.4.4
+
   # common statistical model libraries
   - statsmodels=0.11.1
   - patsy=0.5.1
 
-  # python support for HDF5, a common file format for numerical data
-  # also installs hdf5 itself
+  # python data serialization
+  - dill=0.3.2
+  
+  # HDF4 and HDF5 suport, common file formats for numerical data
+  # and python packages to support them
   - h5py=2.10.0
-
-  # pytables for managing HDF5 data efficiently
   - pytables=3.6.1
+  - hdf4=4.2.13
+  - netcdf4=1.5.4
+
+  # read data from excel spreadsheets
+  - xlrd=1.2.0
+
+  # interactive learning material for mechanical vibrations
+  - resonance=0.22.0
+
+  # toolkit for multi-body dynamics
+  - pydy=0.5.0
+
+  # optimizing dynamic systems using direct collocation
+  - opty=1.0.0
+
+  # common linear algebra library
+  - blas=2.17
 
   # octave and kernel
   - octave=4.2.1
@@ -52,12 +124,49 @@ dependencies:
   # NOTE: the conda build pack will autoinstall irkernel and rstudio
   - r-essentials=4.0
 
+  # common package collection
+  - r-tidyverse=1.3.0
+
+  # make interactive maps in R
+  - r-leaflet=2.0.3
+
+  # univariate time series forecasts
+  - r-forecast=8.12
+
+  # create dashboards with shiny
+  - r-shinydashboard=0.7.1
+
+  # R interface for apache spark
+  - r-sparklyr=1.3.1
+
+  # unit root and cointegration tests for time series data
+  - r-urca=1.3_0
+
+  # misc functions like short time fourier transforms, etc
+  - r-e1071=1.7_3
+
+  # simple features for spacial vector data
+  - r-sf=0.9_5
+
+  # Hexagonal Binning Routines
+  - r-hexbin=1.28.1
+
+  # training and plotting classification and regression models
+  - r-caret=6.0.86
+
+  # nyc flights dataset
+  - r-nycflights13=1.0.1
+
   # c++ kernel
   - xeus-cling=0.9.0
 
+  # common c++ library
+  - boost=1.73.0
+
   # allow installation of pip packages
-  - pip=20.0.2
+  - pip=20.1.1
   - pip:
     # visualization for ml datasets
     - facets-overview==1.0.0
-
+    # no idea why we need this
+    - pyqtwebengine==5.15.0
