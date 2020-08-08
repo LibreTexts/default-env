@@ -1,2 +1,2 @@
 # sagemath and its jupyter kernel
-#sagemath-jupyter
+sagemath-jupyter

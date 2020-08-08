@@ -5,9 +5,6 @@ dependencies:
   # support multiple kernels in multiple conda envs
   - nb_conda_kernels=2.2.3
 
-  # list conda dependencies, useful for debugging
-  - conda-tree=0.1.0
-
   # scipy stack for general scientific computation
   - numpy=1.19.1
   - scipy=1.5.2
@@ -112,7 +109,8 @@ dependencies:
   # - opty=1.0.0 # NOTE not installing due to it only having packages for python up to 3.6. repackage?
 
   # common linear algebra library
-  - blas=2.17
+  # highest version is 2.17, but it conflicts with xeus-cling
+  - blas=2.14
 
   # octave and kernel
   - octave=4.2.1
@@ -147,7 +145,7 @@ dependencies:
   - r-nycflights13=1.0.1
 
   # c++ kernel
-  - xeus-cling=0.9.0 # latest version not available due to conflict with 
+  - xeus-cling=0.9.0
 
   # common c++ library
   - boost=1.72.0 # latest version not available due to rdkit (from mordred) needing this version instead. tbh not sure if this should be a top level pkg
