@@ -1,2 +1,17 @@
+# common cli tools and helpers
+bash-completion
+nano
+vim
+
+# full texlive environment
+texlive-full
+
+# installing octave here because if we do it through conda, it is going to look for a specific compiler that no longer exists when we do `pkg install` anything.
+# sh: 1: /home/conda/feedstock_root/build_artifacts/octave_1587137750417/_build_env/bin/x86_64-conda_cos6-linux-gnu-c++: not found
+# relevant issue: https://github.com/ContinuumIO/anaconda-issues/issues/9863 even if it's a different language
+# octave_kernel still installed through conda, though
+octave
+octave-*
+
 # sagemath and its jupyter kernel
 sagemath-jupyter

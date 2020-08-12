@@ -112,8 +112,7 @@ dependencies:
   # highest version is 2.17, but it conflicts with xeus-cling
   - blas=2.14
 
-  # octave and kernel
-  - octave=4.2.1
+  # octave kernel (octave itself installed through apt, see apt.txt for details
   - octave_kernel=0.32.0
 
   # R
@@ -144,16 +143,17 @@ dependencies:
   # nyc flights dataset
   - r-nycflights13=1.0.1
 
+  # sqlite support in r
+  - r-rsqlite=2.2.0
+
+  # libcurl in r
+  - r-rcurl=1.98_1.2
+
   # c++ kernel
   - xeus-cling=0.9.0
-
-  # common c++ library
-  - boost=1.72.0 # latest version not available due to rdkit (from mordred) needing this version instead. tbh not sure if this should be a top level pkg
 
   # allow installation of pip packages
   - pip=20.1.1
   - pip:
     # visualization for ml datasets
     - facets-overview==1.0.0
-    # no idea why we need this
-    - pyqtwebengine==5.15.0
