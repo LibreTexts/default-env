@@ -11,7 +11,10 @@ jupyter labextension install jupyter-matplotlib@^0.7.3 --no-build
 jupyter labextension install @bokeh/jupyter_bokeh@^2.0.3 --no-build
 
 # add launcher icons for proxied applications like RStudio
-jupyter labextension install @jupyterlab/server-proxy@^2.1.1
+jupyter labextension install @jupyterlab/server-proxy@^2.1.1 --no-build
+
+# add our FAQ to the help menu
+jupyter labextension install git+https://github.com/LibreTexts/labextension-libretexts-faq --no-build
 
 # finally, build the lab
 jupyter lab build --dev-build=False
