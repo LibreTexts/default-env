@@ -1,8 +1,3 @@
-name = "JuliaDependencies"
-uuid = "1766137a-ad63-4d24-b094-539b1caeafcf"
-authors = ["rkevin"]
-version = "0.1.0"
-
 [deps]
 # popular plotting library
 Gadfly = "c91e804a-d5a3-530f-b6f0-dfbca275c004"
