@@ -12,6 +12,3 @@ texlive-full
 # octave_kernel still installed through conda, though
 octave
 octave-*
-
-# sagemath and its jupyter kernel
-sagemath-jupyter

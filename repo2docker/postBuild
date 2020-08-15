@@ -1,5 +1,24 @@
 #!/bin/bash -e
 
+# install sagemath 9.1
+# doing it here because the apt version is 8.1, uses python2, and conflicts the heck out with conda's python3
+# and installing it via conda just never finishes solving
+# instead, we download from source and unpack into /srv/conda (because it's one of the few writable directories we have)
+# the tar creates a SageMath folder so we can just unpack it into /srv/conda
+echo "Installing SageMath, this will take a while..."
+if [ `curl -s http://files.sagemath.org/linux/64bit/sage-9.1-Ubuntu_18.04-x86_64.tar.bz2 | tee >(tar xjC /srv/conda) | md5sum | head -c32` != "97f09d3f7cd473f1d07e1b3768fc2c27" ]; then
+    echo "SageMath md5sum verification failed!"
+    exit 1
+fi
+echo "SageMath unpacked, performing setup..."
+# patch sagemath paths
+/srv/conda/SageMath/relocate-once.py >/dev/null
+# add sagemath to path by just plopping it in /srv/conda/bin/sage
+ln -s /srv/conda/SageMath/sage /srv/conda/bin
+# add sagemath kernel
+jupyter kernelspec install --user /srv/conda/SageMath/local/share/jupyter/kernels/sagemath/
+echo "SageMath installed"
+
 # install some lab extensions
 
 # ipywidgets and its frontend, required by most extensions
