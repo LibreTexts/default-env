@@ -15,7 +15,8 @@ echo "SageMath unpacked, performing setup..."
 /srv/conda/SageMath/relocate-once.py >/dev/null
 # add sagemath to path by just plopping it in /srv/conda/bin/sage
 ln -s /srv/conda/SageMath/sage /srv/conda/bin
-# add sagemath kernel
+# add sagemath kernel (along with setting SAGE_ROOT correctly)
+sed -i 's|.$|,"env": {"SAGE_ROOT": "/srv/conda/SageMath"}}|' /srv/conda/SageMath/local/share/jupyter/kernels/sagemath/kernel.json
 jupyter kernelspec install --user /srv/conda/SageMath/local/share/jupyter/kernels/sagemath/
 echo "SageMath installed"
 
