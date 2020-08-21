@@ -11,12 +11,12 @@ At the moment, this repository contains two Jupyter environments.
 
 * **Minimum Default** contains all requested packages,
 with only a Python environment.
+
 * **Rich Default** contains all the requested packages,
 with the Python, R, Julia, Octave, and Sage environments.
+This is our legacy image and is kept as a reference.
 
-**repo2docker** contains our attempt to use repo2docker to generate
-a Docker image. It failed to install packages in the root environment.
-Kept as a reference for now.
+**repo2docker** contains an updated image that should be built via [repo2docker](https://github.com/jupyterhub/repo2docker). This is our most up-to-date image used on the hub.
 
 # Requesting additional installed packages
 
