@@ -10,6 +10,14 @@ vim
 octave
 octave-*
 
+# base functionality packages for users who don't want to deal with conda
+clang
+cmake
+ffmpeg
+htop
+pandoc
+tree
+
 # install all dependencies of texlive-full except for...
 # latex-cjk-all, texlive-fonts-extra, texlive-fonts-extra-doc, texlive-fonts-extra-links and all texlive-lang-* except texlive-lang-english
 # these were excluded to reduce image size and we don't expect high usage for those dependencies
