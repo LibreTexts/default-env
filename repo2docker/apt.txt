@@ -17,6 +17,7 @@ ffmpeg
 htop
 pandoc
 tree
+imagemagick
 
 # install all dependencies of texlive-full except for...
 # latex-cjk-all, texlive-fonts-extra, texlive-fonts-extra-doc, texlive-fonts-extra-links and all texlive-lang-* except texlive-lang-english
