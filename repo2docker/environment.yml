@@ -4,6 +4,9 @@ channels:
 dependencies:
   # support multiple kernels in multiple conda envs
   - nb_conda_kernels=2.2.3
+ 
+  # used so that instructors can distribute their git files to students in jupyterhub
+  - nbgitpuller=0.9.0
 
   # scipy stack for general scientific computation
   - numpy=1.19.1
