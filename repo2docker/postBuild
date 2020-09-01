@@ -22,6 +22,9 @@ echo "SageMath installed"
 
 # install some lab extensions
 
+# enable nbgitpuller URLs
+jupyter serverextension enable nbgitpuller --sys-prefix
+
 # ipywidgets and its frontend, required by most extensions
 jupyter nbextension enable --py widgetsnbextension --sys-prefix
 jupyter labextension install @jupyter-widgets/jupyterlab-manager@^2.0 --no-build
