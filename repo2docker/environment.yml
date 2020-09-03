@@ -21,6 +21,11 @@ dependencies:
   # ipympl for matplotlib+jupyter integration
   - ipympl=0.5.7
 
+  # some jupyter widgets
+  - ipyvolume=0.6.0a6
+  - nglview=2.7.7
+  - ipycytoscape=1.0.4
+
   # scikits for machine learning and image processing
   - scikit-learn=0.23.1
   - scikit-image=0.17.1

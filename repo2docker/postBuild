@@ -29,6 +29,13 @@ jupyter serverextension enable nbgitpuller --sys-prefix
 jupyter nbextension enable --py widgetsnbextension --sys-prefix
 jupyter labextension install @jupyter-widgets/jupyterlab-manager@^2.0 --no-build
 
+# some other jupyter widgets
+jupyter labextension install ipyvolume --no-build
+jupyter labextension install jupyter-threejs --no-build
+jupyter labextension install bqplot --no-build
+jupyter labextension install nglview-js-widgets --no-build
+jupyter labextension install jupyter-cytoscape --no-build
+
 # extensions for common plotting and data visualization libraries
 jupyter labextension install jupyter-matplotlib@^0.7.3 --no-build
 jupyter labextension install @bokeh/jupyter_bokeh@^2.0.3 --no-build
