@@ -1,0 +1,55 @@
+#!/bin/bash -e
+
+# install sagemath 9.1
+# doing it here because the apt version is 8.1, uses python2, and conflicts the heck out with conda's python3
+# and installing it via conda just never finishes solving
+# instead, we download from source and unpack into /srv/conda (because it's one of the few writable directories we have)
+# the tar creates a SageMath folder so we can just unpack it into /srv/conda
+echo "Installing SageMath, this will take a while..."
+if [ `curl -s http://files.sagemath.org/linux/64bit/sage-9.1-Ubuntu_18.04-x86_64.tar.bz2 | tee >(tar xjC /srv/conda) | md5sum | head -c32` != "97f09d3f7cd473f1d07e1b3768fc2c27" ]; then
+    echo "SageMath md5sum verification failed!"
+    exit 1
+fi
+echo "SageMath unpacked, performing setup..."
+# patch sagemath paths
+/srv/conda/SageMath/relocate-once.py >/dev/null
+# add sagemath to path by just plopping it in /srv/conda/bin/sage
+ln -s /srv/conda/SageMath/sage /srv/conda/bin
+# add sagemath kernel (along with setting SAGE_ROOT correctly)
+sed -i 's|.$|,"env": {"SAGE_ROOT": "/srv/conda/SageMath"}}|' /srv/conda/SageMath/local/share/jupyter/kernels/sagemath/kernel.json
+jupyter kernelspec install --user /srv/conda/SageMath/local/share/jupyter/kernels/sagemath/
+echo "SageMath installed"
+
+# install some lab extensions
+
+# enable nbgitpuller URLs
+jupyter serverextension enable nbgitpuller --sys-prefix
+
+# ipywidgets and its frontend, required by most extensions
+jupyter nbextension enable --py widgetsnbextension --sys-prefix
+jupyter labextension install @jupyter-widgets/jupyterlab-manager@^2.0 --no-build
+
+# some other jupyter widgets
+jupyter labextension install ipyvolume --no-build
+jupyter labextension install jupyter-threejs --no-build
+jupyter labextension install bqplot --no-build
+jupyter labextension install nglview-js-widgets --no-build
+jupyter labextension install jupyter-cytoscape --no-build
+
+# extensions for common plotting and data visualization libraries
+jupyter labextension install jupyter-matplotlib@^0.7.3 --no-build
+jupyter labextension install @bokeh/jupyter_bokeh@^2.0.3 --no-build
+
+# add launcher icons for proxied applications like RStudio
+jupyter labextension install @jupyterlab/server-proxy@^2.1.1 --no-build
+
+# add our FAQ to the help menu
+jupyter labextension install git+https://github.com/LibreTexts/labextension-libretexts-faq --no-build
+
+# finally, build the lab
+jupyter lab build --dev-build=False
+
+# add ~/.conda/envs to the top of default env directories
+# this way, newly created conda envs will be in ~
+# which will get persisted
+echo -e "envs_dirs:\n  - /home/$USER/.conda/envs" >> /srv/conda/.condarc

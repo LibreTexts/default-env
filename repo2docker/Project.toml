@@ -1,0 +1,9 @@
+[deps]
+# popular plotting library
+Gadfly = "c91e804a-d5a3-530f-b6f0-dfbca275c004"
+# allows installing list of julia dependencies based on urls, without project.toml
+InstantiateFromURL = "43edad99-fa64-5e4f-9937-1c09a410b73f"
+# some default datasets available in R, ported to julia
+RDatasets = "ce6b1742-4840-55fa-b093-852dadbb1d8b"
+# support for HDF5 data files
+HDF5 = "f67ccb44-e63f-5c2f-98bd-6dc0ccc4ba2f"
