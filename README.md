@@ -61,7 +61,7 @@ image:
 5. Within the `~/jupyterhub/` directory, run `./upgrade.sh` to apply the helm values for `jhub`, similar to how you did before on `staging-jhub`. 
 6. Once the upgrade is complete, your new image will be deployed and available at `jupyter.libretexts.org`. Spawn the environment selected by default to ensure it deployed properly. Great work!
 
-### Step 5: Committing to Github
+### Step 6: Committing to Github
 
 1. If you made your changes within a branch other than master, be sure to commit your changes made within `~/jupyterhub/config.yaml` and `~/jupyterhub-staging/staging-config.yaml` and then push and make a pull request on the [default-env repository](https://github.com/LibreTexts/default-env). Otherwise, simply push straight to the master branch. 
 
