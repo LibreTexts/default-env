@@ -6,18 +6,70 @@ is to contain as many of the most popular software packages needed for
 scientific computing from a variety of languages: Python, R, Octave, Sage,
 Julia, etc.
 
-# How to Build
+## Repo2docker Configuration Files
 
-1. Be sure to install repo2docker from source using `pip install git+https://github.com/jupyterhub/repo2docker.git`
-2. Update the docker image which repo2docker builds on top of with `docker pull buildpack-deps:bionic`
-3. Run `repo2docker --user-name jovyan --user-id 1000 .` in this directory to start the build. We ensure that we do not break the filesystem by specifying `jovyan` as the username, `user-id 1000` specifies a normal user account (not root), and `.` starts the build in the current directory. You may also run `repo2docker --user-name jovyan --user-id 1000 https://github.com/LibreTexts/default-env` to build an image from master.
-4. Once finished, you will have an image that looks like `r2d-2e1598919088:latest`. Tag the image with your desired tag (`2.x` in this case) using `docker tag r2d-2e1598919088:latest libretexts/default-env:2.x` and push to Docker Hub using `docker push libretexts/default-env:2.x`.
+- [environment.yml](https://repo2docker.readthedocs.io/en/latest/config_files.html#environment-yml-install-a-conda-environment). This file contains all the packages to be installed by conda. It is generally used for R, Python and C/C++ packages. We only install packages available from the conda-forge and default channels here.
+- [apt.txt](https://repo2docker.readthedocs.io/en/latest/config_files.html#apt-txt-install-packages-with-apt-get). Here we install Debian packages through `apt-get` which otherwise are not available through conda, such as texlive and some base functionality tools. We will only install from Ubuntu 18.04 APT repositories. 
+- [Project.toml](https://repo2docker.readthedocs.io/en/latest/config_files.html#project-toml-install-a-julia-environment). This is the file where repo2docker installs Julia packages.
+- [postBuild](https://repo2docker.readthedocs.io/en/latest/config_files.html#postbuild-run-code-after-installing-the-environment). This is a shell script which runs after everything else has been built and installed. We install SageMath and enable JupyterLab extensions here. 
 
-# Legacy environment
+## How to Build a New Image
+
+### Step 1: Pre-Setup
+
+1. Install repo2docker from source using `pip install git+https://github.com/jupyterhub/repo2docker.git`. The stable releases on PyPI are often out of date and the developers themselves have [suggested to install from source](https://github.com/jupyterhub/repo2docker/pull/855). 
+2. [Install and enable Docker](https://docs.docker.com/get-docker/) if you have not already. Repo2docker requires Docker to be running in order to function.
+2. Update the Docker image which repo2docker builds on top of with `docker pull buildpack-deps:bionic`.
+3. Clone the `default-env` repository with `git clone https://github.com/LibreTexts/default-env.git`. You may want do this on one of the test servers we have available so that you can take advantage of *FAST* internet speeds for image builds and pushes.
+
+### Step 2: Making Changes
+
+1. Before beginning, it is usually good practice to create a new git branch and make your changes in there. If you are only doing something minor, and have someone else available to immediately review, you may find it easier to make the changes directly in the master branch. Use your best judgement and ask if uncertain. 
+2. Using nano, vim, or another text-editor of your choice, make changes to add/remove/alter packages within the relevant [repo2docker configuration file(s)](#repo2docker-configuration-files). For the most part you should be able to follow the intallation pattern already present within the file. For instance, all packages installed via conda (such as those for Python and R) will go into `environment.yml` under the `dependencies: ` section with a format of `  -<package-name>=<version-number`. 
+3. If the package requires a `jupyter labextension`, then be sure to place it in `postBuild`. Don't forget to add `--no-build` at the end of the command or else JupyterHub will try to rebuild itself after each `jupyter labextension` command. 
+
+### Step 3: Building, Tagging and Pushing a Test Image
+
+1. After your changes have been made, run `repo2docker --user-name jovyan --user-id 1000 .` in the `default-env/` directory to start the build. We ensure that we do not break the filesystem by specifying `jovyan` as the username, `--user-id 1000` specifies a normal user account (not root), and `.` starts the build in the current working directory.  
+2. Once finished, you will have an image that looks like `r2d-<string>:latest`, where `<string>` could look something like `2e1598919088`. If you do not see this, look for it with `docker images`. You will want to tag this image with `docker tag r2d-<string>:latest libretexts/default-test:<tagname>` so that you can later push this to our testing dockerhub repository . Be sure to fill in the `<string>` and `<tagname>` fields with the actual string value given by repo2docker and the tagname that you desire. An example testing tagname would be something like `pandas-test`.
+3. After the image has been tagged, push it to the testing dockerhub repository wth `docker push libretexts/default-test:<tagname>`. Use the Libretexts dockerhub login credentials when pushing. 
+
+### Step 4: Testing the Image
+
+Before deploying the image to the production environment at jupyter.libretexts.org, you will want to test the image on staging.jupyter.libretexts.org.
+1. ssh into rooster and edit the helm values for staging.jupyter.libretexts.org located at `~/jupyterhub-staging/staging-config.yaml`. Look for the following lines and update the `tag: <tagname>` value with your chosen tagname;
+```
+image:
+  name: libretexts/default-test
+  tag: "<tagname>"
+```
+2. In order to apply your helm value changes, you will need to upgrade the helm chart for `staging-jhub` with these new values. Navigate to `~/jupyterhub-staging/` and use the command `./upgrade.sh` to run the upgrade shell script.
+3. After the upgrade is complete, you can go to staging.jupyter.libretexts.org, spawn the environment selected by default, and you should now be able to test your image in JupyterLab.
+
+### Step 5: Deploying to Production
+
+If you find that the test on staging was successful, you can now deploy the image on production. 
+1. Retag the image with your desired tag (`2.x` in this case) using `docker tag libretexts/default-test:<tagname> libretexts/default-env:2.x`. Starting with our images built using repo2docker, we are using `2.x` (where x is some number) notation to denote the version number.  
+2. Push this image to the default-env dockerhub repository using `docker push libretexts/default-env:2.x`.
+3. ssh into rooster and edit the helm values for jupyter.libretexts.org located at `~/jupyterhub/config.yaml`. Look for a similar `tag: 2.x` line as you did in [Step 4](#step-4-testing-the-image), and change it to your new `2.x` value. 
+```
+image:
+  name: libretexts/default-env
+  tag: "2.x"
+```
+4. Before upgrading, check if there are any users of the Hub with `kubectl get pods -n jhub` before running the upgrade script, as it could cause problems for active users. Get confirmation from another team member before upgrading if there are active users. 
+5. Within the `~/jupyterhub/` directory, run `./upgrade.sh` to apply the helm values for `jhub`, similar to how you did before on `staging-jhub`. 
+6. Once the upgrade is complete, your new image will be deployed and available at `jupyter.libretexts.org`. Spawn the environment selected by default to ensure it deployed properly. Great work!
+
+### Step 5: Committing to Github
+
+1. If you made your changes within a branch other than master, be sure to commit your changes made within `~/jupyterhub/config.yaml` and `~/jupyterhub-staging/staging-config.yaml` and then push and make a pull request on the [default-env repository](https://github.com/LibreTexts/default-env). Otherwise, simply push straight to the master branch. 
+
+## Legacy environment
 
 Before our current setup, there has been a legacy default enviornment used before Aug. 11th, 2020. The `Dockerfile` for this image is available in the `legacy-rich-default` branch. This is kept for reference purposes.
 
-# Requesting additional installed packages
+## Requesting additional installed packages
 
 In general, we will install any user requested software available in the
 [Ubuntu 18.04 LTS apt repositories](https://packages.ubuntu.com/bionic/) or
