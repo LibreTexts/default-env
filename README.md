@@ -25,7 +25,7 @@ Julia, etc.
 ### Step 2: Making Changes
 
 1. Before beginning, it is usually good practice to create a new git branch and make your changes in there. If you are only doing something minor, and have someone else available to immediately review, you may find it easier to make the changes directly in the master branch. Use your best judgement and ask if uncertain. 
-2. Using nano, vim, or another text-editor of your choice, make changes to add/remove/alter packages within the relevant [repo2docker configuration file(s)](#repo2docker-configuration-files). For the most part you should be able to follow the intallation pattern already present within the file. For instance, all packages installed via conda (such as those for Python and R) will go into `environment.yml` under the `dependencies: ` section with a format of `  -<package-name>=<version-number`. 
+2. Using nano, vim, or another text-editor of your choice, make changes to add/remove/alter packages within the relevant [repo2docker configuration file(s)](#repo2docker-configuration-files). For the most part you should be able to follow the intallation pattern already present within the file. For instance, all packages installed via conda (such as those for Python and R) will go into `environment.yml` under the `dependencies: ` section with a format of `  -<package-name>=<version-number`. When adding packages, be sure to add a comment in the file about what the package is and why it was included.
 3. If the package requires a `jupyter labextension`, then be sure to place it in `postBuild`. Don't forget to add `--no-build` at the end of the command or else JupyterHub will try to rebuild itself after each `jupyter labextension` command. 
 
 ### Step 3: Building, Tagging and Pushing a Test Image
