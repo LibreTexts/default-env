@@ -162,3 +162,8 @@ dependencies:
   - pip:
     # visualization for ml datasets
     - facets-overview==1.0.0
+    # nbgrader and ngshare for instructors to create courses and grade assignments
+    # nbgrader has to be installed fron github because the exchange requires a PR not in a stable release
+    - git+https://github.com/jupyter/nbgrader@b15613e
+    - ngshare_exchange==0.5.1
+
