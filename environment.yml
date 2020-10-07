@@ -154,6 +154,9 @@ dependencies:
   # libcurl in r
   - r-rcurl=1.98_1.2
 
+  # shiny gadget to create ggplot2 charts
+  - r-esquisse=0.3.1
+
   # c++ kernel
   - xeus-cling=0.9.0
 
