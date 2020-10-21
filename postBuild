@@ -6,7 +6,7 @@
 # instead, we download from source and unpack into /srv/conda (because it's one of the few writable directories we have)
 # the tar creates a SageMath folder so we can just unpack it into /srv/conda
 echo "Installing SageMath, this will take a while..."
-if [ `curl -s http://files.sagemath.org/linux/64bit/sage-9.1-Ubuntu_18.04-x86_64.tar.bz2 | tee >(tar xjC /srv/conda) | md5sum | head -c32` != "97f09d3f7cd473f1d07e1b3768fc2c27" ]; then
+if [ `curl -s https://mirrors.mit.edu/sage/linux/64bit/sage-9.1-Ubuntu_18.04-x86_64.tar.bz2 | tee >(tar xjC /srv/conda) | md5sum | head -c32` != "97f09d3f7cd473f1d07e1b3768fc2c27" ]; then
     echo "SageMath md5sum verification failed!"
     exit 1
 fi
