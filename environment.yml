@@ -15,6 +15,9 @@ dependencies:
   - pandas=1.1.0
   - sympy=1.6.1
 
+  # jupyter extension for plotly
+  - jupyterlab-plotly-extension=1.0.0
+
   # scale calculations for numpy/pandas/etc.
   - dask=2.22.0
 
