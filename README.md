@@ -7,11 +7,12 @@ scientific computing from a variety of languages: Python, R, Octave, Sage,
 Julia, etc.
 
 ## Repo2docker Configuration Files
+- [environment.yml](https://github.com/LibreTexts/default-env/blob/master/environment.yml). This file contains all the packages to be installed by conda. It is generally used for R, Python and C/C++ packages. We only install packages available from the conda-forge and default channels here.
+- [apt.txt](https://github.com/LibreTexts/default-env/blob/master/apt.txt). Here we install Debian packages through `apt-get` which otherwise are not available through conda, such as texlive and some base functionality tools. We will only install from Ubuntu 18.04 APT repositories. 
+- [Project.toml](https://github.com/LibreTexts/default-env/blob/master/Project.toml). This is the file where repo2docker installs Julia packages.
+- [postBuild](https://github.com/LibreTexts/default-env/blob/master/postBuild). This is a shell script which runs after everything else has been built and installed. We install SageMath and enable JupyterLab extensions here. 
 
-- [environment.yml](https://repo2docker.readthedocs.io/en/latest/config_files.html#environment-yml-install-a-conda-environment). This file contains all the packages to be installed by conda. It is generally used for R, Python and C/C++ packages. We only install packages available from the conda-forge and default channels here.
-- [apt.txt](https://repo2docker.readthedocs.io/en/latest/config_files.html#apt-txt-install-packages-with-apt-get). Here we install Debian packages through `apt-get` which otherwise are not available through conda, such as texlive and some base functionality tools. We will only install from Ubuntu 18.04 APT repositories. 
-- [Project.toml](https://repo2docker.readthedocs.io/en/latest/config_files.html#project-toml-install-a-julia-environment). This is the file where repo2docker installs Julia packages.
-- [postBuild](https://repo2docker.readthedocs.io/en/latest/config_files.html#postbuild-run-code-after-installing-the-environment). This is a shell script which runs after everything else has been built and installed. We install SageMath and enable JupyterLab extensions here. 
+You can read more about each configuration file's purpose from the [repo2docker documentation](https://repo2docker.readthedocs.io/en/latest/config_files.html).
 
 ## How to Build a New Image
 
