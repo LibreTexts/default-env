@@ -160,6 +160,9 @@ dependencies:
   # shiny gadget to create ggplot2 charts
   - r-esquisse
 
+  # package manager for the bioconductor project
+  - r-biocmanager
+
   # c++ kernel
   - xeus-cling
 
