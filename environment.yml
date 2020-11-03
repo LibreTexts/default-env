@@ -3,173 +3,173 @@ channels:
   - defaults
 dependencies:
   # support multiple kernels in multiple conda envs
-  - nb_conda_kernels=2.2.3
+  - nb_conda_kernels
  
   # used so that instructors can distribute their git files to students in jupyterhub
-  - nbgitpuller=0.9.0
+  - nbgitpuller
 
   # scipy stack for general scientific computation
-  - numpy=1.19.1
-  - scipy=1.5.2
-  - matplotlib=3.3.0
-  - pandas=1.1.0
-  - sympy=1.6.1
+  - numpy
+  - scipy
+  - matplotlib
+  - pandas
+  - sympy
 
   # jupyter extension for plotly
   - jupyterlab-plotly-extension=1.0.0
 
   # scale calculations for numpy/pandas/etc.
-  - dask=2.22.0
+  - dask
 
   # ipympl for matplotlib+jupyter integration
-  - ipympl=0.5.7
+  - ipympl
 
   # some jupyter widgets
-  - ipyvolume=0.6.0a6
-  - nglview=2.7.7
-  - ipycytoscape=1.0.4
+  - ipyvolume
+  - nglview
+  - ipycytoscape
 
   # scikits for machine learning and image processing
-  - scikit-learn=0.23.1
-  - scikit-image=0.17.1
+  - scikit-learn
+  - scikit-image
 
   # color palettes for matplotlib
-  - palettable=3.3.0
+  - palettable
 
   # faster expression evaluator, jit compiler, and array functions for numpy
-  - numexpr=2.7.1
-  - numba=0.50.1
-  - bottleneck=1.3.2
+  - numexpr
+  - numba
+  - bottleneck
 
   # extending python and allowing it to interop with C for performance
-  - cython=0.29.21
+  - cython
 
   # python wrapper for ipopt for nonlinear optimization
-  - cyipopt=0.2.0
+  - cyipopt
 
   # specify molecular structures in pandas
-  - biopandas=0.2.6
+  - biopandas
 
   # molecular descriptor calculator
-  - mordred=1.2.0
+  - mordred
 
   # popular python library for astronomy
-  - astropy=4.0.1.post1
+  - astropy
 
   # python library for cartography
-  - cartopy=0.18.0
+  - cartopy
 
   # generic mapping tools
-  - pygmt=0.1.2
+  - pygmt
 
   # python api for searching in the protein data bank
-  - pypdb=1.300
+  - pypdb
 
   # spherical harmonics tools
-  - pyshtools=4.6.2
+  - pyshtools
 
   # package for parsing html
-  - beautifulsoup4=4.9.1
+  - beautifulsoup4
 
   # use R from python
   # - rpy2=3.3.2 # NOTE not installing since this requires R version 3.6.x, not the 4.0.x we're installing
 
   # several common data visualization packages
-  - seaborn=0.10.1
-  - bokeh=2.1.1
-  - bqplot=0.12.14
+  - seaborn
+  - bokeh
+  - bqplot
 
   # python/threejs binding for jupyter visualization
-  - pythreejs=2.2.0
+  - pythreejs
 
   # interactive leaflet maps in python
-  - ipyleaflet=0.13.3
+  - ipyleaflet
 
   # interactive webapps in python
-  - dash=1.13.4
+  - dash
 
   # python to vega translator
-  - vincent=0.4.4
+  - vincent
 
   # common statistical model libraries
-  - statsmodels=0.11.1
-  - patsy=0.5.1
+  - statsmodels
+  - patsy
 
   # python data serialization
-  - dill=0.3.2
+  - dill
   
   # HDF4 and HDF5 suport, common file formats for numerical data
   # and python packages to support them
-  - h5py=2.10.0
-  - pytables=3.6.1
-  - hdf4=4.2.13
+  - h5py
+  - pytables
+  - hdf4
 
   # read data from excel spreadsheets
-  - xlrd=1.2.0
+  - xlrd
 
   # interactive learning material for mechanical vibrations
-  - resonance=0.22.0
+  - resonance
 
   # toolkit for multi-body dynamics
-  - pydy=0.5.0
+  - pydy
 
   # optimizing dynamic systems using direct collocation
   # - opty=1.0.0 # NOTE not installing due to it only having packages for python up to 3.6. repackage?
 
   # common linear algebra library
   # highest version is 2.17, but it conflicts with xeus-cling
-  - blas=2.14
+  - blas
 
   # octave kernel (octave itself installed through apt, see apt.txt for details
-  - octave_kernel=0.32.0
+  - octave_kernel
 
   # R
   # NOTE: the conda build pack will autoinstall irkernel and rstudio
   # however, f**k dependency hell so we're helping it out a bit by installing irkernel and r-devtools here explicitly
-  - r-essentials=4.0
-  - r-irkernel=1.1.1
-  - r-devtools=2.3.1
+  - r-essentials
+  - r-irkernel
+  - r-devtools
 
   # common package collection
-  - r-tidyverse=1.3.0
+  - r-tidyverse
 
   # make interactive maps in R
-  - r-leaflet=2.0.3
+  - r-leaflet
 
   # univariate time series forecasts
-  - r-forecast=8.12
+  - r-forecast
 
   # create dashboards with shiny
-  - r-shinydashboard=0.7.1
+  - r-shinydashboard
 
   # R interface for apache spark
-  - r-sparklyr=1.3.1
+  - r-sparklyr
 
   # simple features for spacial vector data
-  - r-sf=0.9_5
+  - r-sf
 
   # nyc flights dataset
-  - r-nycflights13=1.0.1
+  - r-nycflights13
 
   # sqlite support in r
-  - r-rsqlite=2.2.0
+  - r-rsqlite
 
   # libcurl in r
-  - r-rcurl=1.98_1.2
+  - r-rcurl
 
   # shiny gadget to create ggplot2 charts
-  - r-esquisse=0.3.1
+  - r-esquisse
 
   # c++ kernel
-  - xeus-cling=0.9.0
+  - xeus-cling
 
   # allow installation of pip packages
-  - pip=20.1.1
+  - pip
   - pip:
     # visualization for ml datasets
-    - facets-overview==1.0.0
+    - facets-overview
     # nbgrader and ngshare for instructors to create courses and grade assignments
     # nbgrader has to be installed fron github because the exchange requires a PR not in a stable release
     - git+https://github.com/jupyter/nbgrader@b15613e
-    - ngshare_exchange==0.5.1
+    - ngshare_exchange
 
