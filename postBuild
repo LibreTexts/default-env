@@ -46,7 +46,9 @@ jupyter labextension install jupyter-matplotlib@^0.7.3 --no-build
 jupyter labextension install @bokeh/jupyter_bokeh@^2.0.3 --no-build
 
 # plotly extension
-jupyter labextension install jupyterlab-plotly@^4.11.0 --no-build
+jupyter labextension install jupyterlab-plotly@^4.12.0 --no-build
+jupyter labextension install plotlywidget@^4.12.0 --no-build
+
 # add launcher icons for proxied applications like RStudio
 jupyter labextension install @jupyterlab/server-proxy@^2.1.1 --no-build
 
