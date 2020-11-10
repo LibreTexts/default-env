@@ -1,4 +1,5 @@
 # LibreTexts JupyterHub Default Environment
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/LibreTexts/default-env/HEAD)
 
 This repository contains the repo2docker config files needed to build the default Jupyter
 environment available at jupyter.libretexts.org. The goal of this environment
