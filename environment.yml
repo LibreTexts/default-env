@@ -111,7 +111,7 @@ dependencies:
   - pydy
 
   # optimizing dynamic systems using direct collocation
-  # - opty=1.0.0 # NOTE not installing due to it only having packages for python up to 3.6. repackage?
+  - opty
 
   # common linear algebra library
   # highest version is 2.17, but it conflicts with xeus-cling
