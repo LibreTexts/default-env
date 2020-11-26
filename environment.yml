@@ -1,3 +1,4 @@
+name: testing
 channels:
   - conda-forge
   - defaults
@@ -162,7 +163,7 @@ dependencies:
 
   # package's for Lindsay's class
   - r-rgdal
-    r-maptools
+  - r-maptools
 
   # c++ kernel
   - xeus-cling
