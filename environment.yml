@@ -160,7 +160,7 @@ dependencies:
   # package manager for the bioconductor project
   - r-biocmanager
 
-  # package's for Lindsay's class
+  # packages for Lindsay's class
   - r-rgdal
   - r-maptools
 
