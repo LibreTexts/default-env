@@ -160,6 +160,10 @@ dependencies:
   # package manager for the bioconductor project
   - r-biocmanager
 
+  # packages for Lindsay's class
+  - r-rgdal
+  - r-maptools
+
   # c++ kernel
   - xeus-cling
 
