@@ -4,7 +4,10 @@ channels:
 dependencies:
   # support multiple kernels in multiple conda envs
   - nb_conda_kernels
- 
+
+  # kerberos for HPC authentication
+  - krb5
+
   # used so that instructors can distribute their git files to students in jupyterhub
   - nbgitpuller
 
@@ -94,7 +97,7 @@ dependencies:
 
   # python data serialization
   - dill
-  
+
   # HDF4 and HDF5 suport, common file formats for numerical data
   # and python packages to support them
   - h5py
