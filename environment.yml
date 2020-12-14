@@ -170,6 +170,9 @@ dependencies:
   # c++ kernel
   - xeus-cling
 
+  # sagemath (kernel included)
+  - sage
+
   # allow installation of pip packages
   - pip
   - pip:
