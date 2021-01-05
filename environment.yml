@@ -71,6 +71,10 @@ dependencies:
   # package for parsing html
   - beautifulsoup4
 
+  # packages for Max Rudolph's GEL240 class
+  - affine
+  - rasterio
+
   # use R from python
   # - rpy2=3.3.2 # NOTE not installing since this requires R version 3.6.x, not the 4.0.x we're installing
 
@@ -163,7 +167,7 @@ dependencies:
   # package manager for the bioconductor project
   - r-biocmanager
 
-  # packages for Lindsay's class
+  # packages for Lindsay Poirier's class
   - r-rgdal
   - r-maptools
 
