@@ -66,6 +66,7 @@ image:
 ### Step 6: Committing to Github
 
 1. If you made your changes within a branch other than master, be sure to commit your changes made within `~/jupyterhub/config.yaml` and `~/jupyterhub-staging/staging-config.yaml` and then push and make a pull request on the [default-env repository](https://github.com/LibreTexts/default-env). Otherwise, simply push straight to the master branch. 
+2. Tag the image by now running [`git tag 2.x`](https://www.freecodecamp.org/news/git-tag-explained-how-to-add-remove/). Tags work similar to branches and you will tag whichever commit you are currently located at. Push the tag with `git push origin 2.x`. If you need to update a tag, use the `-f` parameter like `git tag -f 2.x`.
 
 ## Legacy environment
 
