@@ -39,13 +39,13 @@ You can read more about each configuration file's purpose from the [repo2docker 
 ### Step 4: Testing the Image
 
 Before deploying the image to the production environment at jupyter.libretexts.org, you will want to test the image on staging.jupyter.libretexts.org.
-1. ssh into rooster and edit the helm values for staging.jupyter.libretexts.org located at `~/jupyterhub-staging/staging-config.yaml`. Look for the following lines and update the `tag: <tagname>` value with your chosen tagname;
+1. ssh into a management node on the cluster and edit the helm values for staging.jupyter.libretexts.org located at `~/galaxy-control-repo/kubernetes/staging-jhub/staging-config.yaml`. Look for the following lines and update the `tag: <tagname>` value with your chosen tagname;
 ```
 image:
   name: libretexts/default-test
   tag: "<tagname>"
 ```
-2. In order to apply your helm value changes, you will need to upgrade the helm chart for `staging-jhub` with these new values. Navigate to `~/jupyterhub-staging/` and use the command `./upgrade.sh` to run the upgrade shell script.
+2. In order to apply your helm value changes, you will need to upgrade the helm chart for `staging-jhub` with these new values. Navigate to `~/galaxy-control-repo/kubernetes/staging-jhub/` and use the command `./upgrade.sh` to run the upgrade shell script.
 3. After the upgrade is complete, you can go to staging.jupyter.libretexts.org, spawn the environment selected by default, and you should now be able to test your image in JupyterLab.
 
 ### Step 5: Deploying to Production
@@ -53,14 +53,14 @@ image:
 If you find that the test on staging was successful, you can now deploy the image on production. 
 1. Retag the image with your desired tag (`2.x` in this case) using `docker tag libretexts/default-test:<tagname> libretexts/default-env:2.x`. Starting with our images built using repo2docker, we are using `2.x` (where x is some number) notation to denote the version number.  
 2. Push this image to the default-env dockerhub repository using `docker push libretexts/default-env:2.x`.
-3. ssh into rooster and edit the helm values for jupyter.libretexts.org located at `~/jupyterhub/config.yaml`. Look for a similar `tag: 2.x` line as you did in [Step 4](#step-4-testing-the-image), and change it to your new `2.x` value. 
+3. ssh into a management node on the cluster and edit the helm values for jupyter.libretexts.org located at `~/galaxy-control-repo/kubernetes/jhub/config.yaml`. Look for a similar `tag: 2.x` line as you did in [Step 4](#step-4-testing-the-image), and change it to your new `2.x` value. 
 ```
 image:
   name: libretexts/default-env
   tag: "2.x"
 ```
-4. Before upgrading, check if there are any users of the Hub with `kubectl get pods -n jhub` before running the upgrade script, as it could cause problems for active users. Get confirmation from another team member before upgrading if there are active users. 
-5. Within the `~/jupyterhub/` directory, run `./upgrade.sh` to apply the helm values for `jhub`, similar to how you did before on `staging-jhub`. 
+4. Before upgrading, check if there are any users of the Hub with `kubectl get pods -n jhub` before running the upgrade script, as it could cause problems for active users. Get confirmation from another team member to be entirely certain of this before upgrading. 
+5. Within the `~/galaxy-control-repo/kubernetes/jhub/` directory, run `./upgrade.sh` to apply the helm values for `jhub`, similar to how you did before on `staging-jhub`. 
 6. Once the upgrade is complete, your new image will be deployed and available at `jupyter.libretexts.org`. Spawn the environment selected by default to ensure it deployed properly. Great work!
 
 ### Step 6: Committing to Github
