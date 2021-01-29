@@ -19,6 +19,9 @@ You can read more about each configuration file's purpose from the [repo2docker 
 
 ### Step 1: Pre-Setup
 
+1. If you plan to build the image using binder.libretexts.org, you simply need to clone this repository with `git clone https://github.com/LibreTexts/default-env.git` in order to make the changes you need. If you are part of JupyterTeam, it is recommended that you do this as it is much faster and easier.
+
+If you plan to build the image locally, follow these next steps;
 1. Install repo2docker from source using `pip install git+https://github.com/jupyterhub/repo2docker.git`. The stable releases on PyPI are often out of date and the developers themselves have [suggested to install from source](https://github.com/jupyterhub/repo2docker/pull/855). 
 2. [Install and enable Docker](https://docs.docker.com/get-docker/) if you have not already. Repo2docker requires Docker to be running in order to function.
 2. Update the Docker image which repo2docker builds on top of with `docker pull buildpack-deps:bionic`.
@@ -26,12 +29,16 @@ You can read more about each configuration file's purpose from the [repo2docker 
 
 ### Step 2: Making Changes
 
+From now on, follow the steps whether you are building locally or with binder.libretexts.org unless it is otherwise specified.
 1. Before beginning, it is usually good practice to create a new git branch and make your changes in there. If you are only doing something minor, and have someone else available to immediately review, you may find it easier to make the changes directly in the master branch. Use your best judgement and ask if uncertain. 
 2. Using nano, vim, or another text-editor of your choice, make changes to add/remove/alter packages within the relevant [repo2docker configuration file(s)](#repo2docker-configuration-files). For the most part you should be able to follow the intallation pattern already present within the file. For instance, all packages installed via conda (such as those for Python and R) will go into `environment.yml` under the `dependencies: ` section with a format of `  -<package-name>=<version-number`. When adding packages, be sure to add a comment in the file about what the package is and why it was included.
 3. If the package requires a `jupyter labextension`, then be sure to place it in `postBuild`. Don't forget to add `--no-build` at the end of the command or else JupyterHub will try to rebuild itself after each `jupyter labextension` command. 
 
 ### Step 3: Building, Tagging and Pushing a Test Image
 
+1. If you are building using binder.libretexts.org, you will want to use the `docker-retag` script found in metalc-configurations. There is a markdown (`.md`) file that explains how to use it. You will need to login to the JupyterTeam dockerhub online to find the repository that begins with `libretexts/binder-dev-libretexts`. You will find your image uploaded here after it has been built and updated by binder.libretexts.org.
+
+Follow the below steps if you are trying to build the image locally;
 1. After your changes have been made, run `repo2docker --user-name jovyan --user-id 1000 .` in the `default-env/` directory to start the build. We ensure that we do not break the filesystem by specifying `jovyan` as the username, `--user-id 1000` specifies a normal user account (not root), and `.` starts the build in the current working directory.  
 2. Once finished, you will have an image that looks like `r2d-<string>:latest`, where `<string>` could look something like `2e1598919088`. If you do not see this, look for it with `docker images`. You will want to tag this image with `docker tag r2d-<string>:latest libretexts/default-test:<tagname>` so that you can later push this to our testing dockerhub repository . Be sure to fill in the `<string>` and `<tagname>` fields with the actual string value given by repo2docker and the tagname that you desire. An example testing tagname would be something like `pandas-test`.
 3. After the image has been tagged, push it to the testing dockerhub repository wth `docker push libretexts/default-test:<tagname>`. Use the Libretexts dockerhub login credentials when pushing. 
