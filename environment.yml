@@ -27,7 +27,7 @@ dependencies:
   # some jupyter widgets
   - ipyvolume
   - nglview
-  - ipycytoscape=1.0.4
+  - ipycytoscape=1.0.4 # pinned until we switch to jupyterlab3
 
   # scikits for machine learning and image processing
   - scikit-learn
