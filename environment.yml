@@ -5,6 +5,9 @@ dependencies:
   # support multiple kernels in multiple conda envs
   - nb_conda_kernels
 
+  # jupyterlab version override
+  - jupyterlab=2
+
   # kerberos for HPC authentication
   - krb5
 
