@@ -5,10 +5,7 @@ dependencies:
   # support multiple kernels in multiple conda envs
   - nb_conda_kernels
 
-  # jupyterlab version override
-  - jupyterlab=2
-
-  # kerberos for HPC authentication
+# kerberos for HPC authentication
   - krb5
 
   # used so that instructors can distribute their git files to students in jupyterhub
@@ -30,7 +27,7 @@ dependencies:
   # some jupyter widgets
   - ipyvolume
   - nglview
-  - ipycytoscape=1.0.4 # pinned until we switch to jupyterlab3
+  - ipycytoscape
 
   # scikits for machine learning and image processing
   - scikit-learn
