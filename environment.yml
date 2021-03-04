@@ -5,8 +5,11 @@ dependencies:
   # support multiple kernels in multiple conda envs
   - nb_conda_kernels
 
-# kerberos for HPC authentication
+  # kerberos for HPC authentication
   - krb5
+
+  # pin jupyterlab
+  - jupyterlab=3
 
   # used so that instructors can distribute their git files to students in jupyterhub
   - nbgitpuller
