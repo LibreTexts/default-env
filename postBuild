@@ -2,28 +2,6 @@
 
 # install some lab extensions
 
-# ipywidgets and its frontend, required by most extensions
-jupyter nbextension enable --py widgetsnbextension --sys-prefix
-jupyter labextension install @jupyter-widgets/jupyterlab-manager@^2.0 --no-build
-
-# some other jupyter widgets
-jupyter labextension install ipyvolume --no-build
-jupyter labextension install jupyter-threejs --no-build
-jupyter labextension install bqplot --no-build
-jupyter labextension install nglview-js-widgets --no-build
-jupyter labextension install jupyter-cytoscape --no-build
-
-# extensions for common plotting and data visualization libraries
-jupyter labextension install jupyter-matplotlib@^0.7.3 --no-build
-jupyter labextension install @bokeh/jupyter_bokeh@^2.0.3 --no-build
-
-# plotly extension
-jupyter labextension install jupyterlab-plotly@^4.12.0 --no-build
-jupyter labextension install plotlywidget@^4.12.0 --no-build
-
-# add launcher icons for proxied applications like RStudio
-jupyter labextension install @jupyterlab/server-proxy@^2.1.1 --no-build
-
 # add our FAQ to the help menu
 jupyter labextension install git+https://github.com/LibreTexts/labextension-libretexts-faq --no-build
 
