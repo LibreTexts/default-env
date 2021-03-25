@@ -3,7 +3,9 @@
 # install some lab extensions
 
 # add our FAQ to the help menu
-jupyter labextension install git+https://github.com/LibreTexts/labextension-libretexts-faq/tree/migrate --no-build
+git clone git+https://github.com/LibreTexts/labextension-libretexts-faq/tree/migrate
+cd labextension-lbretexts-faq/
+jupyter labextension install . --no-build
 
 # finally, build the lab
 jupyter lab build --dev-build=False
