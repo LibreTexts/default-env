@@ -5,10 +5,13 @@
 # add our FAQ to the help menu
 git clone -b migrate https://github.com/LibreTexts/labextension-libretexts-faq.git
 cd labextension-libretexts-faq/
-jupyter labextension install . --no-build
+jupyter labextension link . --no-build
 
 # finally, build the lab
 jupyter lab build --dev-build=False
+
+# some packages install older versions of an extension by default
+jupyter labextension update --all
 
 # create nbgrader_config to use ngshare as the exchange
 # this allows nbgrader to be used on Z2JH
