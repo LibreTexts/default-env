@@ -5,7 +5,7 @@
 # add our FAQ to the help menu
 git clone -b jlab3 https://github.com/LibreTexts/labextension-libretexts-faq.git
 cd labextension-libretexts-faq/
-jupyter labextension install . --no-build
+jupyter labextension install . 
 
 # add ~/.conda/envs to the top of default env directories
 # this way, newly created conda envs will be in ~
