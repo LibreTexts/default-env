@@ -7,21 +7,6 @@ git clone -b jlab3 https://github.com/LibreTexts/labextension-libretexts-faq.git
 cd labextension-libretexts-faq/
 jupyter labextension install . --no-build
 
-# finally, build the lab
-jupyter lab build --dev-build=False
-
-# some packages install older versions of an extension by default
-jupyter labextension update --all
-
-# create nbgrader_config to use ngshare as the exchange
-# this allows nbgrader to be used on Z2JH
-cat <<EOF > /srv/conda/envs/notebook/etc/jupyter/nbgrader_config.py
-from ngshare_exchange import configureExchange
-c=get_config()
-configureExchange(c, 'http://ngshare:8080/services/ngshare')
-c.CourseDirectory.course_id = '*'
-EOF
-
 # add ~/.conda/envs to the top of default env directories
 # this way, newly created conda envs will be in ~
 # which will get persisted
