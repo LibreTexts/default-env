@@ -37,6 +37,7 @@ From now on, follow the steps whether you are building locally or with binder.li
 ### Step 3: Building, Tagging and Pushing a Test Image
 
 1. If you are building using binder.libretexts.org, you will want to use the `docker-retag` script found in metalc-configurations. There is a markdown (`.md`) file that explains how to use it. You will need to login to the JupyterTeam dockerhub online to find the repository that begins with `libretexts/binder-dev-libretexts`. You will find your image uploaded here after it has been built and updated by binder.libretexts.org.
+2. You may also build an image in your termninal by using an API call. Try something like `curl https://binder.libretexts.org/build/gh/LibreTexts/default-env/<branch>` to build your image and recieve output in the terminal. We suggest building it this way because sometimes the browser will time out.
 
 Follow the below steps if you are trying to build the image locally;
 1. After your changes have been made, run `repo2docker --user-name jovyan --user-id 1000 .` in the `default-env/` directory to start the build. We ensure that we do not break the filesystem by specifying `jovyan` as the username, `--user-id 1000` specifies a normal user account (not root), and `.` starts the build in the current working directory.  
