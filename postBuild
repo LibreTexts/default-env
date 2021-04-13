@@ -3,7 +3,7 @@
 # install some lab extensions
 
 # add our FAQ to the help menu
-git clone -b jlab3 https://github.com/LibreTexts/labextension-libretexts-faq.git
+git clone https://github.com/LibreTexts/labextension-libretexts-faq.git
 cd labextension-libretexts-faq/
 jupyter labextension install . 
 
