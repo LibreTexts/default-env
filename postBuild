@@ -5,6 +5,9 @@ git clone https://github.com/LibreTexts/labextension-libretexts-faq.git
 cd labextension-libretexts-faq/
 jupyter labextension install . 
 
+# run to make sure all extensions are installed correctly
+jupyter lab build
+
 # create nbgrader_config to use ngshare as the exchange
 # this allows nbgrader to be used on Z2JH
 cat <<EOF > /srv/conda/envs/notebook/etc/jupyter/nbgrader_config.py
