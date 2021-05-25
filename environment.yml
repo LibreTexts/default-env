@@ -11,6 +11,9 @@ dependencies:
   # used so that instructors can distribute their git files to students in jupyterhub
   - nbgitpuller
 
+  # nbgrader and ngshare for instructors to create courses and grade assignments
+  - nbgrader
+
   # scipy stack for general scientific computation
   - numpy
   - scipy
@@ -25,9 +28,10 @@ dependencies:
   - ipympl
 
   # some jupyter widgets
-  - ipyvolume
+  #- ipyvolume
   - nglview
-  - ipycytoscape=1.0.4 # pinned until we switch to jupyterlab3
+  - ipycytoscape
+  - ipygany
 
   # scikits for machine learning and image processing
   - scikit-learn
@@ -182,8 +186,3 @@ dependencies:
   - pip:
     # visualization for ml datasets
     - facets-overview
-    # nbgrader and ngshare for instructors to create courses and grade assignments
-    # nbgrader has to be installed fron github because the exchange requires a PR not in a stable release
-    - git+https://github.com/jupyter/nbgrader@b15613e
-    - ngshare_exchange
-
