@@ -181,9 +181,6 @@ dependencies:
   # sagemath (kernel included)
   - sage
  
-  # package requested by Richard
-  - graphviz
-
   # allow installation of pip packages
   - pip
 
