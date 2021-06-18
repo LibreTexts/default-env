@@ -180,9 +180,17 @@ dependencies:
 
   # sagemath (kernel included)
   - sage
+ 
+  # package requested by Richard
+  - graphviz
 
   # allow installation of pip packages
   - pip
+
   - pip:
+
     # visualization for ml datasets
     - facets-overview
+
+    # package requested by Richard
+    - diagrams
