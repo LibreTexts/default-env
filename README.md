@@ -3,6 +3,8 @@
 
 This repository contains the repo2docker config files needed to build the default Jupyter environment available at jupyter.libretexts.org, as well as serve libretexts.org directly via our CKEditor-Binder-Plugin. The goal of this environment is to contain as many of the most popular software packages needed for scientific computing from a variety of languages: Python, R, Octave, Sage, Julia, etc.
 
+The contents of the master branch are not actively used to source any images. Instead, for jhub, we build the images from these files, push them to dockerhub, and then they are pulled onto our machines. CKEditor-Binder-Plugin directly references the git tags in this repo as per the thebe configuration. 
+
 ## Repo2docker Configuration Files
 - [environment.yml](https://github.com/LibreTexts/default-env/blob/master/environment.yml). This file contains all the packages to be installed by conda. It is generally used for R, Python and C/C++ packages. We only install packages available from the conda-forge and default channels here.
 - [apt.txt](https://github.com/LibreTexts/default-env/blob/master/apt.txt). Here we install Debian packages through `apt-get` which otherwise are not available through conda, such as texlive and some base functionality tools. We will only install from Ubuntu 18.04 APT repositories. 
