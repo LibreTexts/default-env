@@ -191,3 +191,6 @@ dependencies:
 
     # package requested by Richard
     - diagrams
+
+    # jupyter archive extension
+    - jupyter-archive
