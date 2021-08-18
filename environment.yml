@@ -130,6 +130,7 @@ dependencies:
 
   # octave kernel (octave itself installed through apt, see apt.txt for details
   - octave_kernel
+  - octave
 
   # R
   # NOTE: the conda build pack will autoinstall irkernel and rstudio

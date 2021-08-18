@@ -1,11 +1,9 @@
 # LibreTexts JupyterHub Default Environment
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/LibreTexts/default-env/HEAD)
 
-This repository contains the repo2docker config files needed to build the default Jupyter
-environment available at jupyter.libretexts.org. The goal of this environment
-is to contain as many of the most popular software packages needed for
-scientific computing from a variety of languages: Python, R, Octave, Sage,
-Julia, etc.
+This repository contains the repo2docker config files needed to build the default Jupyter environment available at jupyter.libretexts.org, as well as serve libretexts.org directly via our CKEditor-Binder-Plugin. The goal of this environment is to contain as many of the most popular software packages needed for scientific computing from a variety of languages: Python, R, Octave, Sage, Julia, etc.
+
+The contents of the master branch are not actively used to source any images. Instead, for jhub, we build the images from these files, push them to dockerhub, and then they are pulled onto our machines. CKEditor-Binder-Plugin directly references the git tags in this repo as per the thebe configuration. 
 
 ## Repo2docker Configuration Files
 - [environment.yml](https://github.com/LibreTexts/default-env/blob/master/environment.yml). This file contains all the packages to be installed by conda. It is generally used for R, Python and C/C++ packages. We only install packages available from the conda-forge and default channels here.
@@ -19,62 +17,52 @@ You can read more about each configuration file's purpose from the [repo2docker 
 
 ### Step 1: Pre-Setup
 
-1. If you plan to build the image using binder.libretexts.org, you simply need to clone this repository with `git clone https://github.com/LibreTexts/default-env.git` in order to make the changes you need. If you are part of JupyterTeam, it is recommended that you do this as it is much faster and easier.
+For JupyterTeam members, it is recommended that you use our binder.libretexts.org deployment in order to build new images. It is generally faster and easier this way. You simply need to clone this repository with `git clone https://github.com/LibreTexts/default-env.git` in order to make the changes you need.
 
-If you plan to build the image locally, follow these next steps;
-1. Install repo2docker from source using `pip install git+https://github.com/jupyterhub/repo2docker.git`. The stable releases on PyPI are often out of date and the developers themselves have [suggested to install from source](https://github.com/jupyterhub/repo2docker/pull/855). 
-2. [Install and enable Docker](https://docs.docker.com/get-docker/) if you have not already. Repo2docker requires Docker to be running in order to function.
-2. Update the Docker image which repo2docker builds on top of with `docker pull buildpack-deps:bionic`.
-3. Clone the `default-env` repository with `git clone https://github.com/LibreTexts/default-env.git`. You may want do this on one of the test servers we have available so that you can take advantage of *FAST* internet speeds for image builds and pushes.
+If you plan to build the image locally, check the README on git tags <=3.1.0.
 
 ### Step 2: Making Changes
 
-From now on, follow the steps whether you are building locally or with binder.libretexts.org unless it is otherwise specified.
-1. Before beginning, it is usually good practice to create a new git branch and make your changes in there. If you are only doing something minor, and have someone else available to immediately review, you may find it easier to make the changes directly in the master branch. Use your best judgement and ask if uncertain. 
+1. Before beginning, it is usually good practice to use staging (or make a new branch) and make your changes there. If you are only doing something minor, and have someone else available to immediately review, you may find it easier to make the changes directly in the master branch. Use your best judgement and ask if uncertain. 
 2. Using nano, vim, or another text-editor of your choice, make changes to add/remove/alter packages within the relevant [repo2docker configuration file(s)](#repo2docker-configuration-files). For the most part you should be able to follow the intallation pattern already present within the file. For instance, all packages installed via conda (such as those for Python and R) will go into `environment.yml` under the `dependencies: ` section with a format of `  -<package-name>=<version-number`. When adding packages, be sure to add a comment in the file about what the package is and why it was included.
-3. If the package requires a `jupyter labextension`, then be sure to place it in `postBuild`. Don't forget to add `--no-build` at the end of the command or else JupyterHub will try to rebuild itself after each `jupyter labextension` command. 
+3. After you have made your changes, be sure to commit and push them to this repository so that binder.libretexts.org can access your changes and build the image.
 
-### Step 3: Building, Tagging and Pushing a Test Image
+### Step 3: Building and Pushing an Image
 
-1. If you are building using binder.libretexts.org, you will want to use the `docker-retag` script found in metalc-configurations. There is a markdown (`.md`) file that explains how to use it. You will need to login to the JupyterTeam dockerhub online to find the repository that begins with `libretexts/binder-dev-libretexts`. You will find your image uploaded here after it has been built and updated by binder.libretexts.org.
-2. You may also build an image in your termninal by using an API call. Try something like `curl https://binder.libretexts.org/build/gh/LibreTexts/default-env/<branch>` to build your image and recieve output in the terminal. We suggest building it this way because sometimes the browser will time out.
-
-Follow the below steps if you are trying to build the image locally;
-1. After your changes have been made, run `repo2docker --user-name jovyan --user-id 1000 .` in the `default-env/` directory to start the build. We ensure that we do not break the filesystem by specifying `jovyan` as the username, `--user-id 1000` specifies a normal user account (not root), and `.` starts the build in the current working directory.  
-2. Once finished, you will have an image that looks like `r2d-<string>:latest`, where `<string>` could look something like `2e1598919088`. If you do not see this, look for it with `docker images`. You will want to tag this image with `docker tag r2d-<string>:latest libretexts/default-test:<tagname>` so that you can later push this to our testing dockerhub repository . Be sure to fill in the `<string>` and `<tagname>` fields with the actual string value given by repo2docker and the tagname that you desire. An example testing tagname would be something like `pandas-test`.
-3. After the image has been tagged, push it to the testing dockerhub repository wth `docker push libretexts/default-test:<tagname>`. Use the Libretexts dockerhub login credentials when pushing. 
+1. While you can use the web browser interface to build your image, it's suggested that you instead interact directly with binder.libretexts.org through [API calls](https://binderhub.readthedocs.io/en/latest/api.html) because the browser sometimes times out. In a terminal shell like bash, try `curl https://binder.libretexts.org/build/gh/LibreTexts/default-env/<branch>`, where `<branch>` is the branch with your changes, to build your image and recieve output in the terminal. This process is automated.
+2. After the image is done building (could be upwards of 30 minutes), binder will immediatly begin to push it to our dockerhub. Once pushed, you will need to login to the JupyterTeam dockerhub (credentials in metalc-configurations) and find the repository called `libretexts/binder-dev-libretexts-2ddefault-2denv-1cb626`. You will find your image uploaded here. The images are labelled by the git hash value, which is given to each git commit and can be viewed on github or with `git log`. Usually the image most recently uploaded is the one that you are looking for.
+3. After the image is done pushing, binder will try to launch the image. At this stage, you may see an `internal server error` and the image will stop launching. As of now, we don't know why these happens, but they are not a problem with the image. If you really need to open the image in binder, just retry until it works.
 
 ### Step 4: Testing the Image
 
 Before deploying the image to the production environment at jupyter.libretexts.org, you will want to test the image on staging.jupyter.libretexts.org.
-1. ssh into a management node on the cluster and edit the helm values for staging.jupyter.libretexts.org located at `~/galaxy-control-repo/kubernetes/staging-jhub/staging-config.yaml`. Look for the following lines and update the `tag: <tagname>` value with your chosen tagname;
+1. The image that our hubs use is specified in the helm values of their helm charts. On the development branch of the galaxy-control-repo, navigate to `galaxy-control-repo/kubernetes/staging-jhub/config.yaml`, and look for the following lines. Update the `tag: <git-hash>` value with the git hash value that corresponds to your image on dockerhub;
 ```
 image:
-  name: libretexts/default-test
-  tag: "<tagname>"
+    name: libretexts/binder-dev-libretexts-2ddefault-2denv-1cb626
+    tag: "<git-hash>" # 3.X.X
 ```
-2. In order to apply your helm value changes, you will need to upgrade the helm chart for `staging-jhub` with these new values. Navigate to `~/galaxy-control-repo/kubernetes/staging-jhub/` and use the command `./upgrade.sh` to run the upgrade shell script.
-3. After the upgrade is complete, you can go to staging.jupyter.libretexts.org, spawn the environment selected by default, and you should now be able to test your image in JupyterLab.
+Make sure to leave a comment with the default-env version number so other members can easily tell which image is being used. 
+
+2. After making your changes, commit and push to github. Make a pull request from the development to production branch (for notification purposes), and you can immediatly merge it.
+3. Once your changes are on the production branch, ssh into a management node on the cluster (such as `gravity`) and `cd ~/galaxy-control-repo/kubernetes/staging-jhub`. Run `git pull` to grab the changes made on the production branch and then run `./upgrade.sh` in this directory to apply the helm chart with your new image. This may take upwards of 10 minutes.
+4. Once the upgrade is complete, you can go to staging.jupyter.libretexts.org, spawn the default environment, and you may test your image in JupyterLab.
 
 ### Step 5: Deploying to Production
 
 If you find that the test on staging was successful, you can now deploy the image on production. 
-1. Retag the image with your desired tag (`2.x` in this case) using `docker tag libretexts/default-test:<tagname> libretexts/default-env:2.x`. Starting with our images built using repo2docker, we are using `2.x` (where x is some number) notation to denote the version number.  
-2. Push this image to the default-env dockerhub repository using `docker push libretexts/default-env:2.x`.
-3. ssh into a management node on the cluster and edit the helm values for jupyter.libretexts.org located at `~/galaxy-control-repo/kubernetes/jhub/config.yaml`. Look for a similar `tag: 2.x` line as you did in [Step 4](#step-4-testing-the-image), and change it to your new `2.x` value. 
-```
-image:
-  name: libretexts/default-env
-  tag: "2.x"
-```
-4. Before upgrading, check if there are any users of the Hub with `kubectl get pods -n jhub` before running the upgrade script, as it could cause problems for active users. Get confirmation from another team member to be entirely certain of this before upgrading. 
-5. Within the `~/galaxy-control-repo/kubernetes/jhub/` directory, run `./upgrade.sh` to apply the helm values for `jhub`, similar to how you did before on `staging-jhub`. 
-6. Once the upgrade is complete, your new image will be deployed and available at `jupyter.libretexts.org`. Spawn the environment selected by default to ensure it deployed properly. Great work!
+1. You will basically repeat Step 4 except with `jhub/config.yaml` now. Be sure to leave a comment here as well about the version number and use the development branch.
+2. Follow the same pull request from development to production process in galaxy-control-repo.
+3. On the management node, now do `cd ~/galaxy-control-repo/kubernetes/jhub` and do git pull again. You will also run `./upgrade.sh` in this directory to apply the new helm chart.
+4. Once this upgrade is complete, you should be able to verify that your new image is now deployed at jupyter.libretexts.org.
 
 ### Step 6: Committing to Github
 
-1. If you made your changes within a branch other than master, be sure to commit your changes made within `~/jupyterhub/config.yaml` and `~/jupyterhub-staging/staging-config.yaml` and then push and make a pull request on the [default-env repository](https://github.com/LibreTexts/default-env). Otherwise, simply push straight to the master branch. 
-2. Tag the image by now running [`git tag 2.x`](https://www.freecodecamp.org/news/git-tag-explained-how-to-add-remove/). Tags work similar to branches and you will tag whichever commit you are currently located at. Push the tag with `git push origin 2.x`. If you need to update a tag, use the `-f` parameter like `git tag -f 2.x`.
+This step may be done any time after you have verified that the image works as intended.
+1. If you made your changes to default-env within a branch other than master, make a pull request to the master branch and merge it (or do so locally).
+2. Tag the branch that you built the image on with your desired version number by running `git tag 3.X.X`. [Tags](https://twitter.com/kyliebytes/status/1405941706650841091) work similarly to branches and you will tag whichever commit you are currently located at. Push the tag with `git push origin 3.X.X`. If you need to update a tag, use the `-f` parameter like `git tag -f 3.X.X`. Generally, the major version number will be changed with each major release of JupyterLab, while the minor version number can be updated when new things like packages or kernels are added. The final patch number is for small fixes.
+
+Note: It is important that you tag the commit that you actually built and tested the image on. If you tag a branch after a pull request has been made to it, this would trigger a rebuild if the tag is referenced in binder since pull requests count as new commits. Keep this in mind for CKEditor-Binder-Plugin, which references the git tag and not the exact dockerhub image git hash.
 
 ## Legacy environment
 

@@ -10,7 +10,6 @@ graphviz
 # sh: 1: /home/conda/feedstock_root/build_artifacts/octave_1587137750417/_build_env/bin/x86_64-conda_cos6-linux-gnu-c++: not found
 # relevant issue: https://github.com/ContinuumIO/anaconda-issues/issues/9863 even if it's a different language
 # octave_kernel still installed through conda, though
-octave
 octave-*
 
 # base functionality packages for users who don't want to deal with conda
