@@ -28,7 +28,7 @@ dependencies:
   - ipympl
 
   # some jupyter widgets
-  #- ipyvolume
+  - ipyvolume=0.6.0a8
   - nglview
   - ipycytoscape
   - ipygany
@@ -194,6 +194,3 @@ dependencies:
 
     # jupyter archive extension
     - jupyter-archive
-
-    # ipyvolume version that is compatible with jlab 3
-    - ipyvolume==0.6.0a8
