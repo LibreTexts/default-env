@@ -180,6 +180,9 @@ dependencies:
 
   # sagemath (kernel included)
   - sage
+  
+  # jupyter git extension
+  - jupyterlab-git
  
   # allow installation of pip packages
   - pip
