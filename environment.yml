@@ -28,7 +28,7 @@ dependencies:
   - ipympl
 
   # some jupyter widgets
-  - ipyvolume=0.6.0a8
+  # - ipyvolume=0.6.0a8
   - nglview
   - ipycytoscape
   - ipygany
