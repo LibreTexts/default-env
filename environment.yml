@@ -180,6 +180,9 @@ dependencies:
 
   # sagemath (kernel included)
   - sage
+
+  # ipyparallel
+  - ipyparallel=6.3.0
   
   # jupyter git extension
   - jupyterlab-git
