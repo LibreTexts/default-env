@@ -3,81 +3,81 @@ channels:
   - defaults
 dependencies:
   # support multiple kernels in multiple conda envs
-  - nb_conda_kernels
+  - nb_conda_kernels=2.3.1
 
   # kerberos for HPC authentication
-  - krb5
+  - krb5=1.17.2
 
   # used so that instructors can distribute their git files to students in jupyterhub
-  - nbgitpuller
+  - nbgitpuller=0.10.1
 
   # nbgrader and ngshare for instructors to create courses and grade assignments
-  - nbgrader
+  - nbgrader=0.6.1
 
   # scipy stack for general scientific computation
-  - numpy
-  - scipy
-  - matplotlib
-  - pandas
-  - sympy
+  - numpy=1.21.2
+  - scipy=1.7.1
+  - matplotlib=3.4.3
+  - pandas=1.3.2
+  - sympy=1.8
 
   # scale calculations for numpy/pandas/etc.
-  - dask
+  - dask=2021.8.0
 
   # ipympl for matplotlib+jupyter integration
-  - ipympl
+  - ipympl=0.7.0
 
   # some jupyter widgets
   # - ipyvolume=0.6.0a8
-  - nglview
-  - ipycytoscape
-  - ipygany
+  - nglview=3.0.3
+  - ipycytoscape=1.2.2
+  - ipygany=0.5.0
 
   # scikits for machine learning and image processing
-  - scikit-learn
-  - scikit-image
+  - scikit-learn=0.24.2
+  - scikit-image=0.18.2
 
   # color palettes for matplotlib
-  - palettable
+  - palettable=3.3.0
 
   # faster expression evaluator, jit compiler, and array functions for numpy
-  - numexpr
-  - numba
-  - bottleneck
+  - numexpr=2.7.3
+  - numba=0.53.1
+  - bottleneck=1.3.2
 
   # extending python and allowing it to interop with C for performance
-  - cython
+  - cython=0.29.24
 
   # python wrapper for ipopt for nonlinear optimization
-  - cyipopt
+  - cyipopt=1.0.3
 
   # specify molecular structures in pandas
-  - biopandas
+  - biopandas=0.2.7
 
   # molecular descriptor calculator
-  - mordred
+  - mordred=1.2.0
 
   # popular python library for astronomy
-  - astropy
+  - astropy=4.3.1
 
   # python library for cartography
-  - cartopy
+  - cartopy=0.18.0
 
   # generic mapping tools
-  - pygmt
+  - pygmt=0.3.1
 
   # python api for searching in the protein data bank
-  - pypdb
+  - pypdb=2.0
 
   # spherical harmonics tools
-  - pyshtools
+  - pyshtools=4.8
 
   # package for parsing html
-  - beautifulsoup4
+  - beautifulsoup4=4.9.3
 
   # packages for Max Rudolph's GEL240 class
-  - affine
-  - rasterio
+  - affine=2.3.0
+  - rasterio=1.2.1
 
   # use R from python
   # - rpy2=3.3.2 # NOTE not installing since this requires R version 3.6.x, not the 4.0.x we're installing
@@ -88,7 +88,7 @@ dependencies:
   - bqplot
 
   # python/threejs binding for jupyter visualization
-  - pythreejs
+  - pythreejs=2.3.0
 
   # interactive leaflet maps in python
   - ipyleaflet
@@ -119,24 +119,24 @@ dependencies:
   - resonance
 
   # toolkit for multi-body dynamics
-  - pydy
+  - pydy=0.5.0
 
   # optimizing dynamic systems using direct collocation
   # - opty=1.0.0 # NOTE not installing due to it only having packages for python up to 3.6. repackage?
 
   # common linear algebra library
   # highest version is 2.17, but it conflicts with xeus-cling
-  - blas
+  - blas=2.111
 
   # octave kernel (octave itself installed through apt, see apt.txt for details
-  - octave_kernel
+  - octave_kernel=0.32.0
 
   # R
   # NOTE: the conda build pack will autoinstall irkernel and rstudio
   # however, f**k dependency hell so we're helping it out a bit by installing irkernel and r-devtools here explicitly
-  - r-essentials
-  - r-irkernel
-  - r-devtools
+  - r-essentials=4.0
+  - r-irkernel=1.1.1
+  - r-devtools=2.4.2
 
   # common package collection
   - r-tidyverse
@@ -176,27 +176,27 @@ dependencies:
   - r-maptools
 
   # c++ kernel
-  - xeus-cling
+  - xeus-cling=0.12.1
 
   # sagemath (kernel included)
-  - sage
+  - sage=9.2
 
   # ipyparallel
   - ipyparallel=6.3.0
-  
-  # jupyter git extension
-  - jupyterlab-git
- 
+
   # allow installation of pip packages
-  - pip
+  - pip=21.0.1
 
   - pip:
 
     # visualization for ml datasets
-    - facets-overview
+    - facets-overview==1.0.0
 
     # package requested by Richard
-    - diagrams
+    - diagrams==0.20.0
 
     # jupyter archive extension
-    - jupyter-archive
+    - jupyter-archive==3.0.1
+
+    # jupyter git extension
+    - jupyterlab-git
