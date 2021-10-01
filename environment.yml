@@ -200,3 +200,6 @@ dependencies:
 
     # jupyter git extension
     - jupyterlab-git
+
+    # allows r studio launch button to appear
+    - jupyter-server-proxy
