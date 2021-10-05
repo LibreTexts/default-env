@@ -184,6 +184,9 @@ dependencies:
   # ipyparallel
   - ipyparallel=6.3.0
 
+  # allows r studio launch button to appear
+  - jupyter-server-proxy
+
   # allow installation of pip packages
   - pip=21.0.1
 
@@ -200,6 +203,4 @@ dependencies:
 
     # jupyter git extension
     - jupyterlab-git
-
-    # allows r studio launch button to appear
-    - jupyter-server-proxy
+    
