@@ -204,3 +204,5 @@ dependencies:
     # jupyter git extension
     - jupyterlab-git
     
+    # slurm magic extension
+    - git+https://github.com/NERSC/slurm-magic.git
