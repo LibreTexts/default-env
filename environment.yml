@@ -206,3 +206,6 @@ dependencies:
     
     # slurm magic extension
     - git+https://github.com/NERSC/slurm-magic.git
+
+    # jupyterlab latex extension
+    - jupyterlab_latex
