@@ -13,9 +13,6 @@ graphviz
 octave
 octave-*
 
-# for slurm client
-slurm-wlm
-
 # base functionality packages for users who don't want to deal with conda
 clang
 cmake
