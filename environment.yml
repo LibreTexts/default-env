@@ -11,7 +11,7 @@ dependencies:
   # used so that instructors can distribute their git files to students in jupyterhub
   - nbgitpuller=0.10.1
 
-  # nbgrader and ngshare for instructors to create courses and grade assignments
+  # nbgrader for instructors to create courses and grade assignments
   - nbgrader=0.6.1
 
   # scipy stack for general scientific computation
@@ -203,3 +203,6 @@ dependencies:
 
     # jupyterlab latex extension
     - jupyterlab_latex
+
+    # ngshare for instructors to create courses and grade assignments
+    - ngshare_exchange==0.5.1
