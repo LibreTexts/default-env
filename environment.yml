@@ -12,7 +12,7 @@ dependencies:
   - nbgitpuller=0.10.1
 
   # nbgrader for instructors to create courses and grade assignments
-  - nbgrader=0.6.1
+  - nbgrader=0.8.0
 
   # scipy stack for general scientific computation
   - numpy=1.21.2
@@ -205,4 +205,4 @@ dependencies:
     - jupyterlab_latex
 
     # ngshare for instructors to create courses and grade assignments
-    - ngshare_exchange==0.5.1
+    - ngshare_exchange==0.5.2
