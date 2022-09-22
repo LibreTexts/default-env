@@ -200,3 +200,6 @@ dependencies:
 
     # jupyter git extension
     - jupyterlab-git
+
+    # jupyterlab latex extension
+    - jupyterlab_latex
