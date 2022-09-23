@@ -9,10 +9,10 @@ dependencies:
   - krb5=1.17.2
 
   # used so that instructors can distribute their git files to students in jupyterhub
-  - nbgitpuller=0.10.1
+  # - nbgitpuller=0.10.1
 
   # nbgrader for instructors to create courses and grade assignments
-  - nbgrader=0.7.1
+  # - nbgrader=0.7.1
 
   # scipy stack for general scientific computation
   - numpy=1.21.2
@@ -206,3 +206,6 @@ dependencies:
 
     # ngshare for instructors to create courses and grade assignments
     - ngshare_exchange==0.5.2
+
+    # nbgitpuller
+    - nbgitpuller==1.1.0
