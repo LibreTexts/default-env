@@ -179,7 +179,7 @@ dependencies:
   - xeus-cling=0.12.1
 
   # sagemath (kernel included)
-  - sage
+  #- sage
 
   # ipyparallel
   - ipyparallel=6.3.0
