@@ -178,11 +178,8 @@ dependencies:
   # c++ kernel
   - xeus-cling=0.12.1
 
-  # dependency of sagemath
-  - giac=1.6.0.47
-
   # sagemath (kernel included)
-  - sage=9.6
+  - sage
 
   # ipyparallel
   - ipyparallel=6.3.0
