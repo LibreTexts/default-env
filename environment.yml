@@ -9,7 +9,7 @@ dependencies:
   - krb5=1.17.2
 
   # used so that instructors can distribute their git files to students in jupyterhub
-  # - nbgitpuller=0.10.1
+  - nbgitpuller=1.1.0
 
   # nbgrader for instructors to create courses and grade assignments
   - nbgrader=0.7.1
@@ -179,7 +179,7 @@ dependencies:
   - xeus-cling=0.12.1
 
   # sagemath (kernel included)
-  #- sage
+  - sage=9.2
 
   # ipyparallel
   - ipyparallel=6.3.0
@@ -205,7 +205,4 @@ dependencies:
     - jupyterlab_latex
 
     # ngshare for instructors to create courses and grade assignments
-    - ngshare_exchange==0.5.2
-
-    # nbgitpuller
-    - nbgitpuller==1.1.0
+    # - ngshare_exchange==0.5.2
