@@ -1,6 +1,5 @@
 channels:
   - conda-forge
-  - anaconda
   - defaults
 dependencies:
   # support multiple kernels in multiple conda envs
@@ -13,7 +12,7 @@ dependencies:
   - nbgitpuller=1.1.0
 
   # nbgrader for instructors to create courses and grade assignments
-  - nbgrader=0.7.1
+  # - nbgrader=0.7.1
 
   # scipy stack for general scientific computation
   - numpy=1.21.2
