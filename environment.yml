@@ -205,4 +205,4 @@ dependencies:
     - jupyterlab_latex
 
     # ngshare for instructors to create courses and grade assignments
-    - ngshare_exchange==0.5.2
+    # - ngshare_exchange==0.5.2
