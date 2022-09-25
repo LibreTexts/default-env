@@ -1,6 +1,0 @@
-#!/bin/bash
-set -e
-
-export PIP_EXISTS_ACTION=w
-
-exec "$@"
