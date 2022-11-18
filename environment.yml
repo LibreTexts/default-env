@@ -11,9 +11,6 @@ dependencies:
   # used so that instructors can distribute their git files to students in jupyterhub
   - nbgitpuller=1.1.0
 
-  # nbgrader for instructors to create courses and grade assignments
-  # - nbgrader=0.7.1
-
   # scipy stack for general scientific computation
   - numpy=1.21.2
   - scipy=1.7.1
@@ -83,40 +80,40 @@ dependencies:
   # - rpy2=3.3.2 # NOTE not installing since this requires R version 3.6.x, not the 4.0.x we're installing
 
   # several common data visualization packages
-  - seaborn
-  - bokeh
-  - bqplot
+  - seaborn=0.12.0
+  - bokeh=2.4.3
+  - bqplot=0.12.36
 
   # python/threejs binding for jupyter visualization
   - pythreejs=2.3.0
 
   # interactive leaflet maps in python
-  - ipyleaflet
+  - ipyleaflet=0.17.1
 
   # interactive webapps in python
-  - dash
+  - dash=2.6.2
 
   # python to vega translator
-  - vincent
+  - vincent=0.4.4
 
   # common statistical model libraries
-  - statsmodels
-  - patsy
+  - statsmodels=0.13.2
+  - patsy=0.5.2
 
   # python data serialization
-  - dill
+  - dill=0.3.5.1
 
   # HDF4 and HDF5 suport, common file formats for numerical data
   # and python packages to support them
-  - h5py
-  - pytables
-  - hdf4
+  - h5py=3.3.0
+  - pytables=3.6.1
+  - hdf4=4.2.15
 
   # read data from excel spreadsheets
-  - xlrd
+  - xlrd=2.0.1
 
   # interactive learning material for mechanical vibrations
-  - resonance
+  - resonance=0.22.0
 
   # toolkit for multi-body dynamics
   - pydy=0.5.0
@@ -135,45 +132,45 @@ dependencies:
   # NOTE: the conda build pack will autoinstall irkernel and rstudio
   # however, f**k dependency hell so we're helping it out a bit by installing irkernel and r-devtools here explicitly
   - r-essentials=4.0
-  - r-irkernel=1.1.1
+  - r-irkernel=1.2
   - r-devtools=2.4.2
 
   # common package collection
-  - r-tidyverse
+  - r-tidyverse=1.3.2
 
   # make interactive maps in R
-  - r-leaflet
+  - r-leaflet=2.1.1
 
   # univariate time series forecasts
-  - r-forecast
+  - r-forecast=8.17.0
 
   # create dashboards with shiny
-  - r-shinydashboard
+  - r-shinydashboard=0.7.2
 
   # R interface for apache spark
-  - r-sparklyr
+  - r-sparklyr=1.7.8
 
   # simple features for spacial vector data
-  - r-sf
+  - r-sf=0.9_7
 
   # nyc flights dataset
-  - r-nycflights13
+  - r-nycflights13=1.0.2
 
   # sqlite support in r
-  - r-rsqlite
+  - r-rsqlite=2.2.8
 
   # libcurl in r
-  - r-rcurl
+  - r-rcurl=1.98_1.3
 
   # shiny gadget to create ggplot2 charts
-  - r-esquisse
+  - r-esquisse=1.1.2
 
   # package manager for the bioconductor project
-  - r-biocmanager
+  - r-biocmanager=1.30.18
 
   # packages for Lindsay Poirier's class
-  - r-rgdal
-  - r-maptools
+  - r-rgdal=1.5_16
+  - r-maptools=1.1_4
 
   # c++ kernel
   - xeus-cling=0.12.1
@@ -199,10 +196,11 @@ dependencies:
     - jupyter-archive==3.0.1
 
     # jupyter git extension
-    - jupyterlab-git
+    - jupyterlab-git==0.39.2
 
     # jupyterlab latex extension
-    - jupyterlab_latex
+    - jupyterlab-latex==3.1.0
 
     # ngshare for instructors to create courses and grade assignments
+    # (auto installs nbgrader)
     - ngshare_exchange==0.5.3
