@@ -91,7 +91,10 @@ dependencies:
   - ipyleaflet=0.17.1
 
   # interactive webapps in python
-  - dash=2.6.2
+  - dash=2.7.1
+  - dash-core-components=2.0.0
+  - dash-html-components=2.0.0
+  - dash-table=5.0.0
 
   # python to vega translator
   - vincent=0.4.4
@@ -190,7 +193,7 @@ dependencies:
     - facets-overview==1.0.0
 
     # package requested by Richard
-    - diagrams==0.20.0
+    - diagrams==0.23.1
 
     # jupyter archive extension
     - jupyter-archive==3.0.1
