@@ -206,4 +206,4 @@ dependencies:
 
     # ngshare for instructors to create courses and grade assignments
     # (auto installs nbgrader)
-    - ngshare_exchange==0.5.3
+    # - ngshare_exchange==0.5.3
