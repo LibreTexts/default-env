@@ -1,5 +1,8 @@
 #!/bin/bash -e
 
+# install ngshare and nbgrader
+# pip install ngshare_exchange
+
 # add our FAQ to the help menu
 git clone https://github.com/LibreTexts/labextension-libretexts-faq.git
 cd labextension-libretexts-faq/
