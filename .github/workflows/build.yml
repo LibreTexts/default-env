@@ -7,9 +7,13 @@ jobs:
     - name: Maximize Disk Space
       shell: bash
       run: |
+        echo "Available storage before:"
+        df -h
         sudo rm -rf /usr/local/lib/android
         sudo rm -rf /opt/ghc
         sudo rm -rf /usr/share/dotnet
+        echo "Available storage after:"
+        df -h
     
     - name: checkout files in repo
       uses: actions/checkout@main
