@@ -6,9 +6,6 @@ cd labextension-libretexts-faq/
 jupyter labextension install . 
 cd .. && rm -rf labextension-libretexts-faq/
 
-# tell r-studio to look in the proper place for libraries
-echo "rsession-ld-library-path=$NB_PYTHON_PREFIX/lib:$LD_LIBRARY_PATH" >> /etc/rstudio/rserver.conf
-
 # run to make sure all extensions are installed correctly
 jupyter lab build
 
