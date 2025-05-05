@@ -1,10 +1,10 @@
 #!/bin/bash -e
 
 # add our FAQ to the help menu
-git clone https://github.com/LibreTexts/labextension-libretexts-faq.git
-cd labextension-libretexts-faq/
-jupyter labextension install . 
-cd .. && rm -rf labextension-libretexts-faq/
+# git clone https://github.com/LibreTexts/labextension-libretexts-faq.git
+# cd labextension-libretexts-faq/
+# jupyter labextension install .
+# cd .. && rm -rf labextension-libretexts-faq/
 
 # run to make sure all extensions are installed correctly
 jupyter lab build
