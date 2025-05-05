@@ -26,58 +26,58 @@ imagemagick
 # latex-cjk-all, texlive-fonts-extra, texlive-fonts-extra-doc, texlive-fonts-extra-links and all texlive-lang-* except texlive-lang-english
 # these were excluded to reduce image size and we don't expect high usage for those dependencies
 
-biber
-chktex
-cm-super
-context
-dvidvi
-dvipng
-feynmf
-fragmaster
-info
-lacheck
-latexdiff
-latexmk
-lcdf-typetools
-lmodern
-prerex
-psutils
-purifyeps
-t1utils
-tex-gyre
-texinfo
-texlive-base
-texlive-bibtex-extra
-texlive-binaries
-texlive-extra-utils
-texlive-font-utils
-texlive-fonts-recommended
-texlive-fonts-recommended-doc
-texlive-formats-extra
-texlive-games
-texlive-humanities
-texlive-humanities-doc
-texlive-lang-english
-texlive-latex-base
-texlive-latex-base-doc
-texlive-latex-extra
-texlive-latex-extra-doc
-texlive-latex-recommended
-texlive-latex-recommended-doc
-texlive-luatex
-texlive-metapost
-texlive-metapost-doc
-texlive-music
-texlive-pictures
-texlive-pictures-doc
-texlive-plain-generic
-texlive-pstricks
-texlive-pstricks-doc
-texlive-publishers
-texlive-publishers-doc
-texlive-science
-texlive-science-doc
-texlive-xetex
-tipa
-vprerex
-xindy
+# biber
+# chktex
+# cm-super
+# context
+# dvidvi
+# dvipng
+# feynmf
+# fragmaster
+# info
+# lacheck
+# latexdiff
+# latexmk
+# lcdf-typetools
+# lmodern
+# prerex
+# psutils
+# purifyeps
+# t1utils
+# tex-gyre
+# texinfo
+# texlive-base
+# texlive-bibtex-extra
+# texlive-binaries
+# texlive-extra-utils
+# texlive-font-utils
+# texlive-fonts-recommended
+# texlive-fonts-recommended-doc
+# texlive-formats-extra
+# texlive-games
+# texlive-humanities
+# texlive-humanities-doc
+# texlive-lang-english
+# texlive-latex-base
+# texlive-latex-base-doc
+# texlive-latex-extra
+# texlive-latex-extra-doc
+# texlive-latex-recommended
+# texlive-latex-recommended-doc
+# texlive-luatex
+# texlive-metapost
+# texlive-metapost-doc
+# texlive-music
+# texlive-pictures
+# texlive-pictures-doc
+# texlive-plain-generic
+# texlive-pstricks
+# texlive-pstricks-doc
+# texlive-publishers
+# texlive-publishers-doc
+# texlive-science
+# texlive-science-doc
+# texlive-xetex
+# tipa
+# vprerex
+# xindy
